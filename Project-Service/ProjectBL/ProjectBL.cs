@@ -131,6 +131,10 @@ namespace ProjectBL
             //Todo: check if the name given is not null or empty string 
             return await _repo.GetSampleByIDAsync(sampleID);
         }
+        public async Task<Sample> GetSampleByUserUserIDAsync(int userID)
+        {
+            return await _repo.GetSampleByUserIDAsync(userID);
+        }
         public async Task<List<Sample>> GetSamplesAsync()
         {
             //TODO add BL

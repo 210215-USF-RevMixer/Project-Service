@@ -26,6 +26,7 @@ namespace ProjectBL
         Task<Pattern> GetPatternByIDAsync(int patternID);
         Task<List<Pattern>> GetPatternsAsync();
         Task<Sample> GetSampleByIDAsync(int sampleID);
+        Task<Sample> GetSampleByUserIDAsync(int userID);
         Task<SamplePlaylist> GetSamplePlaylistByIDAsync(int samplePlaylistID);
         Task<List<SamplePlaylist>> GetSamplePlaylistsAsync();
         Task<List<Sample>> GetSamplesAsync();

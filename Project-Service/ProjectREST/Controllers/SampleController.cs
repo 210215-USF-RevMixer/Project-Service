@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MixerModels;
+using ProjectModels;
 using ProjectBL;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,6 +32,14 @@ namespace ProjectREST.Controllers
         public async Task<IActionResult> GetSampleByIDAsync(int id)
         {
             var user = await _projectBL.GetSampleByIDAsync(id);
+            if (user == null) return NotFound();
+            return Ok(user);
+        }
+
+        // GET api/<ValuesController>/{userId}
+        public async Task<IActionResult> GetSampleByUserIDAsync(int userId)
+        {
+            var user = await _projectBL.GetSampleByUserIDAsync(userId);
             if (user == null) return NotFound();
             return Ok(user);
         }
