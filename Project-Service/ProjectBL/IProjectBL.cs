@@ -14,6 +14,7 @@ namespace ProjectBL
         Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets);
         Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject);
         Task<Track> AddTrackAsync(Track newTrack);
+        Task<Pattern> AddPatternAsync(Pattern newPattern);
         Task<UserProject> AddUserProjectAsync(UserProject newUserProject);
         Task<Pattern> DeletePatternAsync(Pattern pattern2BDeleted);
         Task<Sample> DeleteSampleAsync(Sample sample2BDeleted);
