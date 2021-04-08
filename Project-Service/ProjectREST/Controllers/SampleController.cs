@@ -37,6 +37,7 @@ namespace ProjectREST.Controllers
         }
 
         // GET api/<ValuesController>/{userId}
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetSampleByUserIDAsync(int userId)
         {
             var user = await _projectBL.GetSampleByUserIDAsync(userId);
