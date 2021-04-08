@@ -220,14 +220,22 @@ namespace ProjectDL
                 .Select(track => track)
                 .ToListAsync();
         }
-        public Task<UserProject> GetUserProjectByIDAsync(int userProjectID)
+        public async Task<UserProject> GetUserProjectByIDAsync(int userProjectID)
         {
-            throw new NotImplementedException();
+            return await _context.UserProject
+                .Include(userProject => userProject.SavedProject)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(userProject => userProject.Id == userProjectID);
+
         }
 
-        public Task<List<UserProject>> GetUserProjectsAsync()
+        public async Task<List<UserProject>> GetUserProjectsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.UserProject
+                .Include(userProject => userProject.SavedProject)
+                .AsNoTracking()
+                .Select(userProject => userProject)
+                .ToListAsync();
         }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -309,9 +317,13 @@ namespace ProjectDL
 
         
 
-        public Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated)
+        public async Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated)
         {
-            throw new NotImplementedException();
+            UserProject oldUserProject = await _context.UserProject.Where(up => up.Id == userProject2BUpdated.Id).FirstOrDefaultAsync();
+            _context.Entry(oldUserProject).CurrentValues.SetValues(userProject2BUpdated);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+            return userProject2BUpdated;
         }
 
         
