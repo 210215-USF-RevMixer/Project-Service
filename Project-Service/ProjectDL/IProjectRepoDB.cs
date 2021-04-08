@@ -19,6 +19,10 @@ namespace ProjectDL
         Task<SavedProject> DeleteSavedProjectAsync(SavedProject savedProject2BDeleted);
         Task<Track> DeleteTrackAsync(Track track2BDeleted);
         Task<UserProject> DeleteUserProjectAsync(UserProject userProject2BDeleted);
+        Task<UserProject> GetUserProjectByIDAsync(int userProjectID);
+        Task<List<UserProject>> GetUserProjectsAsync();
+        Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated);
+        Task<Pattern> AddPatternAsync(Pattern newPattern);
         Task<Pattern> GetPatternByIDAsync(int patternID);
         Task<List<Pattern>> GetPatternsAsync();
         Task<Sample> GetSampleByIDAsync(int sampleID);
@@ -37,5 +41,6 @@ namespace ProjectDL
         Task<SampleSets> UpdateSampleSetsAsync(SampleSets sampleSet2BUpdated);
         Task<SavedProject> UpdateSavedProjectAsync(SavedProject savedProject2BUpdated);
         Task<Track> UpdateTrackAsync(Track track2BUpdated);
+
     }
 }

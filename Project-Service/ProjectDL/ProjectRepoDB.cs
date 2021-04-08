@@ -59,6 +59,12 @@ namespace ProjectDL
             await _context.SaveChangesAsync();
             return newUserProject;
         }
+        public async Task<Pattern> AddPatternAsync(Pattern newPattern)
+        {
+            await _context.Pattern.AddAsync(newPattern);
+            await _context.SaveChangesAsync();
+            return newPattern;
+        }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// This block of code has to do with the deleting of different models in our database.
@@ -214,6 +220,15 @@ namespace ProjectDL
                 .Select(track => track)
                 .ToListAsync();
         }
+        public Task<UserProject> GetUserProjectByIDAsync(int userProjectID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<UserProject>> GetUserProjectsAsync()
+        {
+            throw new NotImplementedException();
+        }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// This block of code has to do with the updating of different models in our database.
@@ -291,5 +306,14 @@ namespace ProjectDL
             _context.ChangeTracker.Clear();
             return track2BUpdated;
         }
+
+        
+
+        public Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
