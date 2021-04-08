@@ -16,7 +16,9 @@ namespace ProjectBL
             _repo = repo;
         }
 
-        //SavedProject
+        /// <summary> 
+        /// CRUD operations for SavedProjects returning results from our DB
+        /// </summary>
         public async Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject)
         {
             //Todo: Add BL
@@ -41,7 +43,9 @@ namespace ProjectBL
             return await _repo.UpdateSavedProjectAsync(savedProject2BUpdated);
         }
 
-        //UserProject
+        /// <summary>
+        /// CRUD operations for UserProjects returning results from our DB
+        /// </summary>
         public async Task<UserProject> AddUserProjectAsync(UserProject newUserProject)
         {
             //Todo: Add BL
@@ -66,7 +70,9 @@ namespace ProjectBL
             return await _repo.UpdateUserProjectAsync(userProject2BUpdated);
         }
 
-        //Track
+        /// <summary>
+        /// CRUD operations for Tracks returning results from our DB
+        /// </summary>
         public async Task<Track> AddTrackAsync(Track newTrack)
         {
             //Todo: Add BL
@@ -91,7 +97,9 @@ namespace ProjectBL
             return await _repo.UpdateTrackAsync(track2BUpdated);
         }
 
-        //Pattern
+        /// <summary> 
+        /// CRUD operations for Patterns returning results from our DB
+        /// </summary>
         public async Task<Pattern> AddPatternAsync(Pattern newPattern)
         {
             //Todo: Add BL
@@ -116,7 +124,9 @@ namespace ProjectBL
             return await _repo.UpdatePatternAsync(pattern2BUpdated);
         }
 
-        //Sample
+        /// <summary> 
+        /// CRUD operations for Samples returning results from our DB
+        /// </summary>
         public async Task<Sample> AddSampleAsync(Sample newSample)
         {
             //Todo: Add BL
@@ -141,7 +151,9 @@ namespace ProjectBL
             return await _repo.UpdateSampleAsync(sample2BUpdated);
         }
 
-        //SamplePlaylist
+        /// <summary> 
+        /// CRUD operations for SamplePlaylists returning results from our DB
+        /// </summary>
         public async Task<SamplePlaylist> AddSamplePlaylistAsync(SamplePlaylist newSamplePlaylist)
         {
             return await _repo.AddSamplePlaylistAsync(newSamplePlaylist);
@@ -154,7 +166,6 @@ namespace ProjectBL
         {
             return await _repo.GetSamplePlaylistByIDAsync(samplePlaylistID);
         }
-
         public async Task<List<SamplePlaylist>> GetSamplePlaylistsAsync()
         {
             return await _repo.GetSamplePlaylistsAsync();
@@ -164,7 +175,9 @@ namespace ProjectBL
             return await _repo.UpdateSamplePlaylistAsync(samplePlaylist2BUpdated);
         }
 
-        //SampleSet             
+        /// <summary> 
+        /// CRUD operations for SampleSets returning results from our DB
+        /// </summary>          
         public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets)
         {
             return await _repo.AddSampleSetsAsync(newSampleSets);
