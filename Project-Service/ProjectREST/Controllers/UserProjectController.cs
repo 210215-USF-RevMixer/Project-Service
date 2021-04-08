@@ -13,40 +13,40 @@ namespace Project_Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PatternController : ControllerBase
+    public class UserProjectController : ControllerBase
     {
         private readonly IProjectBL _projectBL;
-        public PatternController(IProjectBL projectBL)
+        public UserProjectController(IProjectBL projectBL)
         {
             _projectBL = projectBL;
         }
-        // GET: api/<PatternController>
+        // GET: api/<UserProjectController>
         [HttpGet]
-        public async Task<IActionResult> GetPatternsAsync()
+        public async Task<IActionResult> GetUserProjectsAsync()
         {
-            return Ok(await _projectBL.GetPatternsAsync());
+            return Ok(await _projectBL.GetUserProjectsAsync());
         }
 
-        // GET api/<PatternController>/5
+        // GET api/<UserProjectController>/5
         [HttpGet("{userID}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetPatternByIDAsync(int userID)
+        public async Task<IActionResult> GetUserProjectByIDAsync(int userID)
         {
-            var user = await _projectBL.GetPatternByIDAsync(userID);
+            var user = await _projectBL.GetUserProjectByIDAsync(userID);
             if (user == null) return NotFound();
             return Ok(user);
         }
 
-        // POST api/<PatternController>
+        // POST api/<UserProjectController>
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddPatternAsync([FromBody] Pattern pattern)
+        public async Task<IActionResult> AddUserProjectAsync([FromBody] UserProject userProject)
         {
             try
             {
-                await _projectBL.AddPatternAsync(pattern);
-                Log.Logger.Information($"new Pattern with ID {pattern.Id} created");
-                return CreatedAtAction("AddPattern", pattern);
+                await _projectBL.AddUserProjectAsync(userProject);
+                Log.Logger.Information($"new UserProject with ID {userProject.Id} created");
+                return CreatedAtAction("AddUserProject", userProject);
             }
             catch (Exception e)
             {
@@ -54,13 +54,13 @@ namespace Project_Service.Controllers
                 return StatusCode(400);
             }
         }
-        // PUT api/<PatternController>/5
+        // PUT api/<UserProjectController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePatternAsync(int id, [FromBody] Pattern pattern)
+        public async Task<IActionResult> UpdateUserProjectAsync(int id, [FromBody] UserProject userProject)
         {
             try
             {
-                await _projectBL.UpdatePatternAsync(pattern);
+                await _projectBL.UpdateUserProjectAsync(userProject);
                 return NoContent();
             }
             catch
@@ -69,13 +69,13 @@ namespace Project_Service.Controllers
             }
         }
 
-        // DELETE api/<PatternController>/5
+        // DELETE api/<UserProjectController>/5
         [HttpDelete("{userID}")]
-        public async Task<IActionResult> DeletePatternAsync(int userID)
+        public async Task<IActionResult> DeleteUserProjectAsync(int userID)
         {
             try
             {
-                await _projectBL.DeletePatternAsync(await _projectBL.GetPatternByIDAsync(userID));
+                await _projectBL.DeleteUserProjectAsync(await _projectBL.GetUserProjectByIDAsync(userID));
                 return NoContent();
             }
             catch

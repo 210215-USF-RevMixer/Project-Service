@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectBL;
+using ProjectModels;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +15,73 @@ namespace Project_Service.Controllers
     [ApiController]
     public class TrackController : ControllerBase
     {
+        private readonly IProjectBL _projectBL;
+        public TrackController(IProjectBL projectBL)
+        {
+            _projectBL = projectBL;
+        }
         // GET: api/<TrackController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetTracksAsync()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _projectBL.GetTracksAsync());
         }
 
         // GET api/<TrackController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{userID}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetTrackByIDAsync(int userID)
         {
-            return "value";
+            var user = await _projectBL.GetTrackByIDAsync(userID);
+            if (user == null) return NotFound();
+            return Ok(user);
         }
 
         // POST api/<TrackController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Consumes("application/json")]
+        public async Task<IActionResult> AddTrackAsync([FromBody] Track track)
         {
+            try
+            {
+                await _projectBL.AddTrackAsync(track);
+                Log.Logger.Information($"new Track with ID {track.Id} created");
+                return CreatedAtAction("AddTrack", track);
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error($"Error thrown: {e.Message}");
+                return StatusCode(400);
+            }
         }
-
         // PUT api/<TrackController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> UpdateTrackAsync(int id, [FromBody] Track track)
         {
+            try
+            {
+                await _projectBL.UpdateTrackAsync(track);
+                return NoContent();
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         // DELETE api/<TrackController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{userID}")]
+        public async Task<IActionResult> DeleteTrackAsync(int userID)
         {
+            try
+            {
+                await _projectBL.DeleteTrackAsync(await _projectBL.GetTrackByIDAsync(userID));
+                return NoContent();
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
