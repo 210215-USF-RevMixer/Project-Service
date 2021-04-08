@@ -12,28 +12,32 @@ Rest API service for adding, updating, and removing projects for RevMixer.
 <tr>
 <td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td><td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td>
 <td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td><td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td>
 </tr> 
@@ -99,22 +103,25 @@ ICollection\<Track>|tracks
 <tr>
 <td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td><td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td>
 <td>
 
-Get / Post| Get / Put / Delete
-----|----
-/api/ | /api/
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
 
 </td></tr> 
 
