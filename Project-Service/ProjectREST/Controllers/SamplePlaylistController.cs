@@ -25,24 +25,14 @@ namespace ProjectREST.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSamplePlaylistsAsync()
         {
-            return Ok(await _projectBL.GetSamplesAsync());
+            return Ok(await _projectBL.GetSamplePlaylistsAsync());
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSamplePlaylistByIDAsync(int id)
         {
-            var user = await _projectBL.GetSampleByIDAsync(id);
-            if (user == null) return NotFound();
-            return Ok(user);
-        }
-
-        // GET api/<ValuesController>/{userId}
-        [HttpGet("{userID}")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GetSamplePlaylistByUserIDAsync(int userId)
-        {
-            var user = await _projectBL.GetSampleByUserIDAsync(userId);
+            var user = await _projectBL.GetSamplePlaylistByIDAsync(id);
             if (user == null) return NotFound();
             return Ok(user);
         }
@@ -50,13 +40,13 @@ namespace ProjectREST.Controllers
         // POST api/<ValuesController>
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddSamplePlaylistAsync([FromBody] Sample sample)
+        public async Task<IActionResult> AddSamplePlaylistAsync([FromBody] SamplePlaylist samplePlaylist)
         {
             try
             {
-                await _projectBL.AddSampleAsync(sample);
-                Log.Logger.Information($"new Sample with ID {sample.Id} created");
-                return CreatedAtAction("AddSample", sample);
+                await _projectBL.AddSamplePlaylistAsync(samplePlaylist);
+                Log.Logger.Information($"new SamplePlaylist with ID {samplePlaylist.Id} created");
+                return CreatedAtAction("AddSample", samplePlaylist);
             }
             catch(Exception e)
             {
@@ -67,11 +57,11 @@ namespace ProjectREST.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSamplePlaylistAsync(int id, [FromBody] Sample sample)
+        public async Task<IActionResult> UpdateSamplePlaylistAsync(int id, [FromBody] SamplePlaylist samplePlaylist)
         {
             try
             {
-                await _projectBL.UpdateSampleAsync(sample);
+                await _projectBL.UpdateSamplePlaylistAsync(samplePlaylist);
                 return NoContent();
             }
             catch
@@ -86,7 +76,7 @@ namespace ProjectREST.Controllers
         {
             try
             {
-                await _projectBL.DeleteSampleAsync(await _projectBL.GetSampleByIDAsync(id));
+                await _projectBL.DeleteSamplePlaylistAsync(await _projectBL.GetSamplePlaylistByIDAsync(id));
                 return NoContent();
             }
             catch
