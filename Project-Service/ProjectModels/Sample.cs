@@ -4,7 +4,6 @@ namespace ProjectModels
 {
     public class Sample
     {
-        private int userId;
         private string sampleName;
         private string sampleLink;
         private ICollection<Track> track;
@@ -13,17 +12,7 @@ namespace ProjectModels
         private bool isLocked;
         
         public int Id { get; set; }
-        public int UserId { 
-            get { return userId; } 
-            set
-            {
-                if (value.GetType() != typeof(int))
-                {
-                    throw new ArgumentException("value");
-                }
-                userId = value;
-            } 
-        }
+
         public string SampleName { 
             get { return sampleName; }
             set
