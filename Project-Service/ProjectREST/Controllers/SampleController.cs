@@ -37,16 +37,6 @@ namespace ProjectREST.Controllers
             return Ok(user);
         }
 
-        // GET api/<ValuesController>/{userId}
-        [HttpGet("{userID}")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GetSampleByUserIDAsync(int userId)
-        {
-            var user = await _projectBL.GetSampleByUserIDAsync(userId);
-            if (user == null) return NotFound();
-            return Ok(user);
-        }
-
         // POST api/<ValuesController>
         [HttpPost]
         [Consumes("application/json")]
