@@ -201,6 +201,10 @@ namespace ProjectBL
         {
             return await _repo.GetUsersSampleByIDAsync(usersSampleID);
         }
+        public async Task<List<UsersSample>> GetUsersSampleByUserIDAsync(int userID)
+        {
+            return await _repo.GetUsersSampleByUserIDAsync(userID);
+        }
         public async Task<UsersSample> UpdateUsersSampleAsync(UsersSample usersSample2BUpdated)
         {
             return await _repo.UpdateUsersSampleAsync(usersSample2BUpdated);
@@ -222,6 +226,10 @@ namespace ProjectBL
         public async Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID)
         {
             return await _repo.GetUsersSampleSetsByIDAsync(usersSampleSetsID);
+        }
+        public async Task<List<UsersSampleSets>> GetUsersSampleSetsByUserIDAsync(int userID)
+        {
+            return await _repo.GetUsersSampleSetsByUserIDAsync(userID);
         }
         public async Task<UsersSampleSets> UpdateUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BUpdated)
         {

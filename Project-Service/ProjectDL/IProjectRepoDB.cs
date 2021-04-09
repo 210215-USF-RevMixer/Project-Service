@@ -55,7 +55,7 @@ namespace ProjectDL
         Task<UsersSampleSets> DeleteUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BDeleted);
         Task<List<UsersSampleSets>> GetUsersSampleSetsAsync();
         Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID);
-        Task<UsersSampleSets> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID);
+        Task<List<UsersSampleSets>> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID);
         Task<UsersSampleSets> UpdateUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BUpdated);
     }
 }

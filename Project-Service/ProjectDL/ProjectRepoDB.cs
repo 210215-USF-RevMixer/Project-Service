@@ -379,7 +379,7 @@ namespace ProjectDL
         //UsersSampleSets
         public async Task<UsersSampleSets> AddUsersSampleSetsAsync(UsersSampleSets newUsersSampleSets)
         {
-            await _context.newUsersSampleSets.AddAsync(newUsersSampleSets);
+            await _context.UsersSampleSets.AddAsync(newUsersSampleSets);
             await _context.SaveChangesAsync();
             return newUsersSampleSets;
         }
@@ -398,9 +398,9 @@ namespace ProjectDL
         public async Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID)
         {
             return await _context.UsersSampleSets
-                .FirstOrDefaultAsync(usersSample => usersSample.Id == usersSampleID);
+                .FirstOrDefaultAsync(usersSample => usersSample.Id == usersSampleSetsID);
         }
-        public async Task<UsersSampleSets> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID)
+        public async Task<List<UsersSampleSets>> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID)
         {
             return await _context.UsersSampleSets
                 .Where(usersSampleSets => usersSampleSets.UserId == usersSampleSetsUserID)
