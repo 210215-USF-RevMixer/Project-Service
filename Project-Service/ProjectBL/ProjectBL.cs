@@ -58,7 +58,6 @@ namespace ProjectBL
         }
         public async Task<List<UserProject>> GetUserProjectsAsync()
         {
-            //TODO add BL
             return await _repo.GetUserProjectsAsync();
         }
         public async Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated)

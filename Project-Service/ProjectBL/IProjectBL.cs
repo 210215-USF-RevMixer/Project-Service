@@ -25,6 +25,8 @@ namespace ProjectBL
         Task<UserProject> DeleteUserProjectAsync(UserProject userProject2BDeleted);
         Task<Pattern> GetPatternByIDAsync(int patternID);
         Task<List<Pattern>> GetPatternsAsync();
+        Task<List<UserProject>> GetUserProjectsAsync();
+        Task<UserProject> GetUserProjectByIDAsync(int userProjectID);
         Task<Sample> GetSampleByIDAsync(int sampleID);
         Task<Sample> GetSampleByUserIDAsync(int userID);
         Task<SamplePlaylist> GetSamplePlaylistByIDAsync(int samplePlaylistID);
@@ -37,6 +39,7 @@ namespace ProjectBL
         Task<Track> GetTrackByIDAsync(int trackID);
         Task<List<Track>> GetTracksAsync();
         Task<Pattern> UpdatePatternAsync(Pattern pattern2BUpdated);
+        Task<UserProject> UpdateUserProjectAsync(UserProject userProject2BUpdated);
         Task<Sample> UpdateSampleAsync(Sample sample2BUpdated);
         Task<SamplePlaylist> UpdateSamplePlaylistAsync(SamplePlaylist samplePlaylist2BUpdated);
         Task<SampleSets> UpdateSampleSetsAsync(SampleSets sampleSet2BUpdated);
