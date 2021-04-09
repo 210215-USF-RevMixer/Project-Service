@@ -105,8 +105,9 @@ ICollection\<Track>|tracks
 
 Get | Post | Put | Delete
 ----|----|----|----
-/api/ | /api/ | /api/ | /api/
-/api/ | /api/ | /api/ | /api/
+/api/Sample | /api/Sample | /api/Sample/{id} | /api/Sample/{id}
+/api/Sample/{id} | | | 
+/api/Sample/{userID} | | | 
 
 </td><td>
 
