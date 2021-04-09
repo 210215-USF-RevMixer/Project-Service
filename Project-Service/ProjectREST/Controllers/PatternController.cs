@@ -28,13 +28,13 @@ namespace Project_Service.Controllers
         }
 
         // GET api/<PatternController>/5
-        [HttpGet("{userID}")]
+        [HttpGet("{patternID}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetPatternByIDAsync(int userID)
+        public async Task<IActionResult> GetPatternByIDAsync(int patternID)
         {
-            var user = await _projectBL.GetPatternByIDAsync(userID);
-            if (user == null) return NotFound();
-            return Ok(user);
+            var pattern = await _projectBL.GetPatternByIDAsync(patternID);
+            if (pattern == null) return NotFound();
+            return Ok(pattern);
         }
 
         // POST api/<PatternController>
@@ -70,12 +70,12 @@ namespace Project_Service.Controllers
         }
 
         // DELETE api/<PatternController>/5
-        [HttpDelete("{userID}")]
-        public async Task<IActionResult> DeletePatternAsync(int userID)
+        [HttpDelete("{patternID}")]
+        public async Task<IActionResult> DeletePatternAsync(int patternID)
         {
             try
             {
-                await _projectBL.DeletePatternAsync(await _projectBL.GetPatternByIDAsync(userID));
+                await _projectBL.DeletePatternAsync(await _projectBL.GetPatternByIDAsync(patternID));
                 return NoContent();
             }
             catch

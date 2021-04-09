@@ -28,13 +28,13 @@ namespace Project_Service.Controllers
         }
 
         // GET api/<TrackController>/5
-        [HttpGet("{userID}")]
+        [HttpGet("{trackID}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetTrackByIDAsync(int userID)
+        public async Task<IActionResult> GetTrackByIDAsync(int trackID)
         {
-            var user = await _projectBL.GetTrackByIDAsync(userID);
-            if (user == null) return NotFound();
-            return Ok(user);
+            var track = await _projectBL.GetTrackByIDAsync(trackID);
+            if (track == null) return NotFound();
+            return Ok(track);
         }
 
         // POST api/<TrackController>
@@ -70,12 +70,12 @@ namespace Project_Service.Controllers
         }
 
         // DELETE api/<TrackController>/5
-        [HttpDelete("{userID}")]
-        public async Task<IActionResult> DeleteTrackAsync(int userID)
+        [HttpDelete("{trackID}")]
+        public async Task<IActionResult> DeleteTrackAsync(int trackID)
         {
             try
             {
-                await _projectBL.DeleteTrackAsync(await _projectBL.GetTrackByIDAsync(userID));
+                await _projectBL.DeleteTrackAsync(await _projectBL.GetTrackByIDAsync(trackID));
                 return NoContent();
             }
             catch

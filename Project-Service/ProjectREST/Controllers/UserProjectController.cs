@@ -28,13 +28,13 @@ namespace Project_Service.Controllers
         }
 
         // GET api/<UserProjectController>/5
-        [HttpGet("{userID}")]
+        [HttpGet("{userProjectID}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetUserProjectByIDAsync(int userID)
+        public async Task<IActionResult> GetUserProjectByIDAsync(int userProjectID)
         {
-            var user = await _projectBL.GetUserProjectByIDAsync(userID);
-            if (user == null) return NotFound();
-            return Ok(user);
+            var userProject = await _projectBL.GetUserProjectByIDAsync(userProjectID);
+            if (userProject == null) return NotFound();
+            return Ok(userProject);
         }
 
         // POST api/<UserProjectController>
@@ -70,12 +70,12 @@ namespace Project_Service.Controllers
         }
 
         // DELETE api/<UserProjectController>/5
-        [HttpDelete("{userID}")]
-        public async Task<IActionResult> DeleteUserProjectAsync(int userID)
+        [HttpDelete("{userProjectID}")]
+        public async Task<IActionResult> DeleteUserProjectAsync(int userProjectID)
         {
             try
             {
-                await _projectBL.DeleteUserProjectAsync(await _projectBL.GetUserProjectByIDAsync(userID));
+                await _projectBL.DeleteUserProjectAsync(await _projectBL.GetUserProjectByIDAsync(userProjectID));
                 return NoContent();
             }
             catch

@@ -19,7 +19,6 @@ namespace ProjectBL
         //SavedProject
         public async Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject)
         {
-            //Todo: Add BL
             return await _repo.AddSavedProjectAsync(newSavedProject);
         }
         public async Task<SavedProject> DeleteSavedProjectAsync(SavedProject savedProject2BDeleted)
@@ -33,7 +32,6 @@ namespace ProjectBL
         }
         public async Task<List<SavedProject>> GetSavedProjectsAsync()
         {
-            //TODO add BL
             return await _repo.GetSavedProjectsAsync();
         }
         public async Task<SavedProject> UpdateSavedProjectAsync(SavedProject savedProject2BUpdated)
@@ -44,7 +42,6 @@ namespace ProjectBL
         //UserProject
         public async Task<UserProject> AddUserProjectAsync(UserProject newUserProject)
         {
-            //Todo: Add BL
             return await _repo.AddUserProjectAsync(newUserProject);
         }
         public async Task<UserProject> DeleteUserProjectAsync(UserProject userProject2BDeleted)
@@ -68,7 +65,6 @@ namespace ProjectBL
         //Track
         public async Task<Track> AddTrackAsync(Track newTrack)
         {
-            //Todo: Add BL
             return await _repo.AddTrackAsync(newTrack);
         }
         public async Task<Track> DeleteTrackAsync(Track track2BDeleted)
@@ -82,7 +78,6 @@ namespace ProjectBL
         }
         public async Task<List<Track>> GetTracksAsync()
         {
-            //TODO add BL
             return await _repo.GetTracksAsync();
         }
         public async Task<Track> UpdateTrackAsync(Track track2BUpdated)
