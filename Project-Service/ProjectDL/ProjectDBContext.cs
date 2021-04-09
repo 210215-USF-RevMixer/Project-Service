@@ -83,6 +83,14 @@ namespace ProjectDL
                 .HasMany(sp => sp.Tracks)
                 .WithOne(t => t.SavedProject)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UsersSample>()
+                .HasMany(us => us.UserId)
+                .HasMany(us => us.SampleId);
+
+            modelBuilder.Entity<UsersSampleSets>()
+                .HasMany(uss => uss.UserId)
+                .HasMany(uss => uss.SampleId);
         }
     }
 }
