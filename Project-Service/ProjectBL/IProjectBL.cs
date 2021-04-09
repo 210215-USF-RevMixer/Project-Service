@@ -28,7 +28,7 @@ namespace ProjectBL
         Task<List<UserProject>> GetUserProjectsAsync();
         Task<UserProject> GetUserProjectByIDAsync(int userProjectID);
         Task<Sample> GetSampleByIDAsync(int sampleID);
-        Task<Sample> GetSampleByUserIDAsync(int userID);
+        Task<List<Sample>> GetSampleByUserIDAsync(int userID);
         Task<SamplePlaylist> GetSamplePlaylistByIDAsync(int samplePlaylistID);
         Task<List<SamplePlaylist>> GetSamplePlaylistsAsync();
         Task<List<Sample>> GetSamplesAsync();
