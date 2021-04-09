@@ -146,12 +146,14 @@ namespace ProjectDL
                 .AsNoTracking()
                 .FirstOrDefaultAsync(sample => sample.Id == sampleID);
         }
-        public async Task<Sample> GetSampleByUserIDAsync(int userID)
+        // Make this a list 
+        public async Task<List<Sample>> GetSampleByUserIDAsync(int userID)
         {
             return await _context.Sample
                 .Include(sample => sample.Track)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(sample => sample.UserId == userID);
+                .Where(sample => sample.UserId == userID)
+                .ToListAsync();
         }
 
         public async Task<List<Sample>> GetSamplesAsync()
