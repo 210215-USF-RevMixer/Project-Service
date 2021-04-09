@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectModels
 {
-    class UsersSample
+    public class UsersSample
     {
         private int userId;
         private int sampleId;
