@@ -146,14 +146,14 @@ namespace ProjectDL
                 .AsNoTracking()
                 .FirstOrDefaultAsync(sample => sample.Id == sampleID);
         }
-        public async Task<List<Sample>> GetSampleByUserIDAsync(int userID)
-        {
-            return await _context.Sample
-                .Include(sample => sample.Track)
-                .AsNoTracking()
-                .Where(sample => sample.UserId == userID)
-                .ToListAsync();
-        }
+        // public async Task<List<Sample>> GetSampleByUserIDAsync(int userID)
+        // {
+        //     return await _context.Sample
+        //         .Include(sample => sample.Track)
+        //         .AsNoTracking()
+        //         .Where(sample => sample.UserId == userID)
+        //         .ToListAsync();
+        // }
 
         public async Task<List<Sample>> GetSamplesAsync()
         {
@@ -334,6 +334,88 @@ namespace ProjectDL
             return userProject2BUpdated;
         }
 
+        //UsersSample
+        public async Task<UsersSample> AddUsersSampleAsync(UsersSample newUsersSample)
+        {
+            await _context.UsersSample.AddAsync(newUsersSample);
+            await _context.SaveChangesAsync();
+            return newUsersSample;
+        }
+        public async Task<UsersSample> DeleteUsersSampleAsync(UsersSample usersSample2BDeleted)
+        {
+            _context.UsersSample.Remove(usersSample2BDeleted);
+            await _context.SaveChangesAsync();
+            return usersSample2BDeleted;
+        }
+        public async Task<List<UsersSample>> GetUsersSamplesAsync()
+        {
+            return await _context.UsersSample
+                .Select(usersSample => usersSample)
+                .ToListAsync();
+        }
+        public async Task<UsersSample> GetUsersSampleByIDAsync(int usersSampleID)
+        {
+            return await _context.UsersSample
+                .FirstOrDefaultAsync(usersSample => usersSample.Id == usersSampleID);
+        }
+        public async Task<List<UsersSample>> GetUsersSampleByUserIDAsync(int usersSampleUserID)
+        {
+            return await _context.UsersSample
+                .Where(usersSample => usersSample.UserId == usersSampleUserID)
+                .ToListAsync();
+        }
+        public async Task<UsersSample> UpdateUsersSampleAsync(UsersSample usersSample2BUpdated)
+        {
+            UsersSample oldUsersSample = await _context.UsersSample.Where(s => s.Id == usersSample2BUpdated.Id).FirstOrDefaultAsync();
+
+            _context.Entry(oldUsersSample).CurrentValues.SetValues(usersSample2BUpdated);
+
+            await _context.SaveChangesAsync();
+
+            _context.ChangeTracker.Clear();
+            return oldUsersSample;
+        }
         
+        //UsersSampleSets
+        public async Task<UsersSampleSets> AddUsersSampleSetsAsync(UsersSampleSets newUsersSampleSets)
+        {
+            await _context.newUsersSampleSets.AddAsync(newUsersSampleSets);
+            await _context.SaveChangesAsync();
+            return newUsersSampleSets;
+        }
+        public async Task<UsersSampleSets> DeleteUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BDeleted)
+        {
+            _context.UsersSampleSets.Remove(usersSampleSets2BDeleted);
+            await _context.SaveChangesAsync();
+            return usersSampleSets2BDeleted;
+        }
+        public async Task<List<UsersSampleSets>> GetUsersSampleSetsAsync()
+        {
+            return await _context.UsersSampleSets
+                .Select(usersSampleSets => usersSampleSets)
+                .ToListAsync();
+        }
+        public async Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID)
+        {
+            return await _context.UsersSampleSets
+                .FirstOrDefaultAsync(usersSample => usersSample.Id == usersSampleID);
+        }
+        public async Task<UsersSampleSets> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID)
+        {
+            return await _context.UsersSampleSets
+                .Where(usersSampleSets => usersSampleSets.UserId == usersSampleSetsUserID)
+                .ToListAsync();
+        }
+        public async Task<UsersSampleSets> UpdateUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BUpdated)
+        {
+            UsersSampleSets oldUsersSampleSets = await _context.UsersSampleSets.Where(s => s.Id == usersSampleSets2BUpdated.Id).FirstOrDefaultAsync();
+
+            _context.Entry(oldUsersSampleSets).CurrentValues.SetValues(usersSampleSets2BUpdated);
+
+            await _context.SaveChangesAsync();
+
+            _context.ChangeTracker.Clear();
+            return oldUsersSampleSets;
+        }
     }
 }

@@ -125,10 +125,10 @@ namespace ProjectBL
             //Todo: check if the name given is not null or empty string 
             return await _repo.GetSampleByIDAsync(sampleID);
         }
-        public async Task<List<Sample>> GetSampleByUserIDAsync(int userID)
-        {
-            return await _repo.GetSampleByUserIDAsync(userID);
-        }
+        // public async Task<List<Sample>> GetSampleByUserIDAsync(int userID)
+        // {
+        //     return await _repo.GetSampleByUserIDAsync(userID);
+        // }
         public async Task<List<Sample>> GetSamplesAsync()
         {
             //TODO add BL
@@ -162,7 +162,7 @@ namespace ProjectBL
             return await _repo.UpdateSamplePlaylistAsync(samplePlaylist2BUpdated);
         }
 
-        //SampleSet             
+        //SampleSets 
         public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets)
         {
             return await _repo.AddSampleSetsAsync(newSampleSets);
@@ -183,5 +183,50 @@ namespace ProjectBL
         {
             return await _repo.UpdateSampleSetsAsync(sampleSet2BUpdated);
         }
+        
+        //UsersSample
+        public async Task<UsersSample> AddUsersSampleAsync(UsersSample newUsersSample)
+        {
+            return await _repo.AddUsersSampleAsync(newUsersSample);
+        }
+        public async Task<UsersSample> DeleteUsersSampleAsync(UsersSample usersSample2BDeleted)
+        {
+            return await _repo.DeleteUsersSampleAsync(usersSample2BDeleted);
+        }
+        public async Task<List<UsersSample>> GetUsersSamplesAsync()
+        {
+            return await _repo.GetUsersSamplesAsync();
+        }
+        public async Task<UsersSample> GetUsersSampleByIDAsync(int usersSampleID)
+        {
+            return await _repo.GetUsersSampleByIDAsync(usersSampleID);
+        }
+        public async Task<UsersSample> UpdateUsersSampleAsync(UsersSample usersSample2BUpdated)
+        {
+            return await _repo.UpdateUsersSampleAsync(usersSample2BUpdated);
+        }
+        
+        //UsersSampleSets
+        public async Task<UsersSampleSets> AddUsersSampleSetsAsync(UsersSampleSets newUsersSampleSets)
+        {
+            return await _repo.AddUsersSampleSetsAsync(newUsersSampleSets);
+        }
+        public async Task<UsersSampleSets> DeleteUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BDeleted)
+        {
+            return await _repo.DeleteUsersSampleSetsAsync(usersSampleSets2BDeleted);
+        }
+        public async Task<List<UsersSampleSets>> GetUsersSampleSetsAsync()
+        {
+            return await _repo.GetUsersSampleSetsAsync();
+        }
+        public async Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID)
+        {
+            return await _repo.GetUsersSampleSetsByIDAsync(usersSampleSetsID);
+        }
+        public async Task<UsersSampleSets> UpdateUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BUpdated)
+        {
+            return await _repo.UpdateUsersSampleSetsAsync(usersSampleSets2BUpdated);
+        }
+        
     }
 }

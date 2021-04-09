@@ -28,7 +28,7 @@ namespace ProjectBL
         Task<List<UserProject>> GetUserProjectsAsync();
         Task<UserProject> GetUserProjectByIDAsync(int userProjectID);
         Task<Sample> GetSampleByIDAsync(int sampleID);
-        Task<List<Sample>> GetSampleByUserIDAsync(int userID);
+        //Task<List<Sample>> GetSampleByUserIDAsync(int userID);
         Task<SamplePlaylist> GetSamplePlaylistByIDAsync(int samplePlaylistID);
         Task<List<SamplePlaylist>> GetSamplePlaylistsAsync();
         Task<List<Sample>> GetSamplesAsync();
@@ -45,6 +45,20 @@ namespace ProjectBL
         Task<SampleSets> UpdateSampleSetsAsync(SampleSets sampleSet2BUpdated);
         Task<SavedProject> UpdateSavedProjectAsync(SavedProject savedProject2BUpdated);
         Task<Track> UpdateTrackAsync(Track track2BUpdated);
-
+        //UsersSample
+        Task<UsersSample> AddUsersSampleAsync(UsersSample newUsersSample);
+        Task<UsersSample> DeleteUsersSampleAsync(UsersSample usersSample2BDeleted);
+        Task<List<UsersSample>> GetUsersSamplesAsync();
+        Task<UsersSample> GetUsersSampleByIDAsync(int usersSampleID);
+        Task<List<UsersSample>> GetUsersSampleByUserIDAsync(int usersSampleUserID);
+        Task<UsersSample> UpdateUsersSampleAsync(UsersSample usersSample2BUpdated);
+        
+        //UsersSampleSets
+        Task<UsersSampleSets> AddUsersSampleSetsAsync(UsersSampleSets newUsersSampleSets);
+        Task<UsersSampleSets> DeleteUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BDeleted);
+        Task<List<UsersSampleSets>> GetUsersSampleSetsAsync();
+        Task<UsersSampleSets> GetUsersSampleSetsByIDAsync(int usersSampleSetsID);
+        Task<UsersSampleSets> GetUsersSampleSetsByUserIDAsync(int usersSampleSetsUserID);
+        Task<UsersSampleSets> UpdateUsersSampleSetsAsync(UsersSampleSets usersSampleSets2BUpdated);
     }
 }
