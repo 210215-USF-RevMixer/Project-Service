@@ -20,6 +20,8 @@ namespace ProjectDL
         public DbSet<Sample> Sample { get; set; }
         public DbSet<SamplePlaylist> SamplePlaylist { get; set; }
         public DbSet<SampleSets> SampleSet { get; set; }
+        public DbSet<UsersSample> UsersSample { get; set; }
+        public DbSet<UsersSampleSets> UsersSampleSets { get; set; }
         public DbSet<SavedProject> SavedProject { get; set; }
         public DbSet<Track> Track { get; set; }
         public DbSet<UserProject> UserProject { get; set; }
@@ -35,6 +37,12 @@ namespace ProjectDL
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<SampleSets>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<UsersSample>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<UsersSampleSets>()
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<SavedProject>()
@@ -75,6 +83,7 @@ namespace ProjectDL
                 .HasMany(sp => sp.Tracks)
                 .WithOne(t => t.SavedProject)
                 .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }
