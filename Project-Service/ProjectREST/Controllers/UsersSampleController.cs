@@ -26,6 +26,16 @@ namespace ProjectREST.Controllers
         {
             return Ok(await _projectBL.GetUsersSamplesAsync());
         }
+        //GET api/<UploadMusicController>/uploadedmusic/userid
+        [HttpGet]
+        [Route("/api/UsersSample/User/{userID}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetUsersSampleByUserIDAsync(int userID)
+        {
+            var usersSample = await _projectBL.GetUsersSampleByUserIDAsync(userID);
+            if (usersSample == null) return NotFound();
+            return Ok(usersSample);
+        }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
