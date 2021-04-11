@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectREST", "ProjectREST\ProjectREST.csproj", "{95F3712D-457D-47D8-A89C-57364D773F67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectREST", "ProjectREST\ProjectRest.csproj", "{95F3712D-457D-47D8-A89C-57364D773F67}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectModels", "ProjectModels\ProjectModels.csproj", "{C3ABC387-5134-4AFB-8F69-AB3E5D0F7783}"
 EndProject

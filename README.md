@@ -96,7 +96,7 @@ ICollection\<Track>|tracks
 <hr />
 <hr />
 <table>
-<tr><th><h3>Sample</h3></th><th><h3>SamplePlaylist</h3></th><th><h3>SampleSets</h3></th></tr>
+<tr><th><h3>Sample</h3></th><th><h3>SamplePlaylist</h3></th><th><h3>SampleSets</h3></th><th><h3>UsersSample</h3></th><th><h3>UsersSampleSets</h3></th></tr>
 <tr>
 <th><h4>Endpoints</h4></th>
 </tr>
@@ -124,7 +124,23 @@ Get | Post | Put | Delete
 /api/ | /api/ | /api/ | /api/
 /api/ | /api/ | /api/ | /api/
 
+</td><td>
+
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
+
+</td>
+<td>
+
+Get | Post | Put | Delete
+----|----|----|----
+/api/ | /api/ | /api/ | /api/
+/api/ | /api/ | /api/ | /api/
+
 </td></tr> 
+</tr> 
 
 <tr>
 <th><h4>Model Properties</h4></th>
@@ -135,7 +151,6 @@ Get | Post | Put | Delete
 DataType | Variable
 ----|----
 int|Id
-int|userId
 string|sampleName
 string|sampleLink
 ICollection\<Track>|track
@@ -159,6 +174,25 @@ DataType | Variable
 ----|----
 int|Id
 string|name
+
+</td>
+<td>
+
+DataType | Variable
+----|----
+int|Id
+int|userId
+int|sampleId
+bool|isOwner
+
+</td>
+<td>
+
+DataType | Variable
+----|----
+int|Id
+int|userId
+int|sampleSetsId
 
 </td>
 </tr>
