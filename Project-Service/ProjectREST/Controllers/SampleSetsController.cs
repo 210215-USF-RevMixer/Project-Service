@@ -76,7 +76,7 @@ namespace ProjectREST.Controllers
         {
             try
             {
-                await _projectBL.DeleteSampleAsync(await _projectBL.GetSampleByIDAsync(id));
+                await _projectBL.DeleteSampleSetsAsync(await _projectBL.GetSampleSetsByIDAsync(id));
                 return NoContent();
             }
             catch
