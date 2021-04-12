@@ -1,29 +1,55 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
-- main
+  branches:
+    include:
+    - main
 
-resources:
-- repo: self
+pool:
+  vmImage: 'windows-latest'
 
 variables:
-  tag: '$(Build.BuildId)'
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
 
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Project-Service/Dockerfile'
-        tags: |
-          $(tag)
+steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'P3 sonarcloud'
+    organization: '210215-usf-revmixer'
+    scannerMode: 'MSBuild'
+    projectKey: '210215-USF-RevMixer_Project-Service'
+    projectName: 'Project-Service'
+
+- task: DotNetCoreCLI@2
+  displayName: 'restore'
+  inputs:
+    command: 'restore'
+    projects: '**/*.sln'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: 'build'
+  inputs:
+    command: 'build'
+    projects: '**/*.sln'
+
+#- task: DotNetCoreCLI@2
+#  displayName: 'test'
+#  inputs:
+#    command: 'test'
+#    projects: '**/UploadMusicService/UploadMusicTest/*.csproj'
+#    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+#  continueOnError: true
+
+#- task: PublishCodeCoverageResults@1
+#  displayName: publish code coverage results
+#  inputs:
+#    codeCoverageTool: 'Cobertura'
+#    summaryFileLocation: '**/coburtura/coverage.xml'
+
+- task: SonarCloudAnalyze@1
+  displayName: run code analysis
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
