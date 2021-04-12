@@ -23,6 +23,6 @@
     <ProjectReference Include="..\ProjectBL\ProjectBL.csproj" />
     <ProjectReference Include="..\ProjectDL\ProjectDL.csproj" />
     <ProjectReference Include="..\ProjectModels\ProjectModels.csproj" />
-     <ProjectReference Include="..\ProjectRest\ProjectRest.csproj" />
+     <ProjectReference Include="..\ProjectREST\ProjectRest.csproj" />
   </ItemGroup>
 </Project>
