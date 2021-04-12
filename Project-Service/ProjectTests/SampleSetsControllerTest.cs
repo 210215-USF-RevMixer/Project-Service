@@ -21,6 +21,20 @@ namespace ProjectTests
             _projectBLMock = new Mock<IProjectBL>();
         }
         [Fact]
+        public async Task GetSampleSetsAsyncShouldReturnSampleSets()
+        {
+            //arrange
+            SampleSets sample = new SampleSets();
+            _projectBLMock.Setup(i => i.GetSampleSetsAsync());
+            SampleSetsController sampleController = new SampleSetsController(_projectBLMock.Object);
+
+            //act 
+            var result = await sampleController.GetSampleSetsAsync();
+
+            //assert
+            Assert.IsType<OkObjectResult>(result);
+        }
+        [Fact]
         public async Task GetSampleSetsByIdShouldGetSampleSet()
         {
             var sampleId = 1;
@@ -31,7 +45,7 @@ namespace ProjectTests
             Assert.Equal(sampleId, ((SampleSets)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetSampleSetsByIDAsync(sampleId));
         }
-         [Fact]
+        [Fact]
         public async Task AddSampleSetsShouldAddSampleSets()
         {
             var sample = new SampleSets();
@@ -41,10 +55,10 @@ namespace ProjectTests
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddSampleSetsAsync((It.IsAny<SampleSets>())));
         }
-          [Fact]
+        [Fact]
         public async Task DeleteSampleSetsShouldDeleteSampleSets()
         {
-            var sample = new SampleSets{Id = 1};
+            var sample = new SampleSets { Id = 1 };
             _projectBLMock.Setup(x => x.DeleteSampleSetsAsync(It.IsAny<SampleSets>())).Returns(Task.FromResult<SampleSets>(sample));
             var sampleController = new SampleSetsController(_projectBLMock.Object);
             var result = await sampleController.DeleteSampleSetsAsync(sample.Id);
@@ -62,6 +76,6 @@ namespace ProjectTests
             _projectBLMock.Verify(x => x.UpdateSampleSetsAsync(sample));
 
         }
-     
+
     }
 }

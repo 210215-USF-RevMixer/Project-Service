@@ -21,6 +21,20 @@ namespace ProjectTests
             _projectBLMock = new Mock<IProjectBL>();
         }
         [Fact]
+        public async Task GetSamplesAsyncShouldReturnSamples()
+        {
+            //arrange
+            Sample sample = new Sample();
+            _projectBLMock.Setup(i => i.GetSamplesAsync());
+            SampleController sampleController = new SampleController(_projectBLMock.Object);
+
+            //act 
+            var result = await sampleController.GetSamplesAsync();
+
+            //assert
+            Assert.IsType<OkObjectResult>(result);
+        }
+        [Fact]
         public async Task GetSampleByIdShouldGetSample()
         {
             var sampleId = 1;
@@ -31,7 +45,7 @@ namespace ProjectTests
             Assert.Equal(sampleId, ((Sample)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetSampleByIDAsync(sampleId));
         }
-         [Fact]
+        [Fact]
         public async Task AddSampleShouldAddSample()
         {
             var sample = new Sample();
@@ -41,10 +55,10 @@ namespace ProjectTests
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddSampleAsync((It.IsAny<Sample>())));
         }
-          [Fact]
+        [Fact]
         public async Task DeleteSampleShouldDeleteSample()
         {
-            var sample = new Sample{Id = 1};
+            var sample = new Sample { Id = 1 };
             _projectBLMock.Setup(x => x.DeleteSampleAsync(It.IsAny<Sample>())).Returns(Task.FromResult<Sample>(sample));
             var sampleController = new SampleController(_projectBLMock.Object);
             var result = await sampleController.DeleteSampleAsync(sample.Id);
@@ -62,6 +76,6 @@ namespace ProjectTests
             _projectBLMock.Verify(x => x.UpdateSampleAsync(sample));
 
         }
-     
+
     }
 }

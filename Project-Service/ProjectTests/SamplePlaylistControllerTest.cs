@@ -20,6 +20,20 @@ namespace ProjectTests
         {
             _projectBLMock = new Mock<IProjectBL>();
         }
+         [Fact]
+        public async Task GetSamplesPlaylistAsyncShouldReturnSamplePlaylists()
+        {
+            //arrange
+            SamplePlaylist sample = new SamplePlaylist();
+            _projectBLMock.Setup(i => i.GetSamplePlaylistsAsync());
+            SamplePlaylistController sampleController = new SamplePlaylistController(_projectBLMock.Object);
+
+            //act 
+            var result = await sampleController.GetSamplePlaylistsAsync();
+
+            //assert
+            Assert.IsType<OkObjectResult>(result);
+        }
         [Fact]
         public async Task GetSampleByIdShouldGetSample()
         {
