@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectBL;
 using ProjectModels;
 using Serilog;
@@ -46,9 +46,9 @@ namespace ProjectREST.Controllers
             {
                 await _projectBL.AddSampleSetsAsync(sampleSets);
                 Log.Logger.Information($"new SampleSets with ID {sampleSets.Id} created");
-                return CreatedAtAction("AddSample", sampleSets);
+                return CreatedAtAction("AddSampleSets", sampleSets);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Logger.Error($"Error thrown: {e.Message}");
                 return StatusCode(400);

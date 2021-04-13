@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectBL;
 using ProjectModels;
 using Serilog;
@@ -46,9 +46,9 @@ namespace ProjectREST.Controllers
             {
                 await _projectBL.AddSamplePlaylistAsync(samplePlaylist);
                 Log.Logger.Information($"new SamplePlaylist with ID {samplePlaylist.Id} created");
-                return CreatedAtAction("AddSample", samplePlaylist);
+                return CreatedAtAction("AddSamplePlaylist", samplePlaylist);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Logger.Error($"Error thrown: {e.Message}");
                 return StatusCode(400);
