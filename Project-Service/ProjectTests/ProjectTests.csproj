@@ -14,15 +14,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
+<ItemGroup>
     <ProjectReference Include="..\ProjectBL\ProjectBL.csproj" />
-    <ProjectReference Include="..\ProjectREST\ProjectRest.csproj" />
+    <ProjectReference Include="..\ProjectDL\ProjectDL.csproj" />
+    <ProjectReference Include="..\ProjectModels\ProjectModels.csproj" />
+     <ProjectReference Include="..\ProjectREST\ProjectRest.csproj" />
   </ItemGroup>
-
 </Project>
