@@ -11,11 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectBL", "ProjectBL\Proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectDL", "ProjectDL\ProjectDL.csproj", "{A0E28566-0BAF-4A63-AB52-48F9154ED946}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTests", "ProjectTests\ProjectTests.csproj", "{107E7105-0AB4-41E6-A35F-1828194D3034}"
-=======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTests", "ProjectTests\ProjectTests.csproj", "{08E2BD10-B29C-4C27-A434-FE7427FE7B4F}"
->>>>>>> cb24e4d8231d6d7530a72e5fb1794dd4aaecde4d
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
