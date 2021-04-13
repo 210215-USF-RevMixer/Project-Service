@@ -12,9 +12,9 @@ namespace ProjectModels
         private int sampleId;
         private bool isOwner;
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int SampleId { get; set; }
-        public bool IsOwner { get; set; }
+        public int UserId { get { return userId; } set { userId = value; } }
+        public int SampleId { get { return sampleId; } set { sampleId = value; } }
+        public bool IsOwner { get { return isOwner; } set { isOwner = value; } }
         
     }
 }
