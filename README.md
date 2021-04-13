@@ -261,7 +261,23 @@ int|sampleSetsId
 </td>
 </tr>
 </table>
+<hr />
+<hr />
+<table>
+<tr><th><h3>SampleBlob</h3></th></tr>
+<tr>
+<th><h4>Endpoints</h4></th>
+</tr>
+<tr>
+<td>
 
+Post |
+----|----
+/api/SampleBlob |
+
+</td></tr> 
+</tr> 
+</table>
 ### Requirements
 
 ### Setup
