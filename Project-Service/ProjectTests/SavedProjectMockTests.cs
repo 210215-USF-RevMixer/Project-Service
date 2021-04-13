@@ -1,5 +1,4 @@
 ﻿using Moq;
-using Project_Service.Controllers;
 using ProjectBL;
 using ProjectModels;
 using System;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.Mvc;
+using ProjectREST.Controllers;
 
 namespace ProjectTests
 {
