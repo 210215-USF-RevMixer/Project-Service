@@ -271,9 +271,9 @@ int|sampleSetsId
 <tr>
 <td>
 
-Post |
-----|----
-/api/SampleBlob |
+| Post |
+|----|----|
+| /api/SampleBlob |
 
 </td></tr> 
 </tr> 
