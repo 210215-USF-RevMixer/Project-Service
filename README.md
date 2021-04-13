@@ -270,10 +270,10 @@ int|sampleSetsId
 </tr>
 <tr>
 <td>
-
-| Post |
-|----|----|
-| /api/SampleBlob |
+<table>
+<th>Post</th>
+<tr><td>/api/SampleBlob</td></tr>
+</table>
 
 </td></tr> 
 </tr> 
