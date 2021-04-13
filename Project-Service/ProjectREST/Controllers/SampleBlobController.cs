@@ -22,7 +22,7 @@ namespace ProjectREST.Controllers
             string fileName = Guid.NewGuid().ToString() + file.FileName;
             string localPath = @"C:\local\Temp\" + Guid.NewGuid().ToString();
             string fileType = file.ContentType;
-            string containerEndpoint = "https://revmixerstoragep3.blob.core.windows.net/uploadsample";
+            string containerEndpoint = "https://revmixerstorage2.blob.core.windows.net/uploadsample";
             BlobContainerClient containerClient = new BlobContainerClient(new Uri(containerEndpoint), new DefaultAzureCredential(new DefaultAzureCredentialOptions { ExcludeSharedTokenCacheCredential = true }));
             try
             {
