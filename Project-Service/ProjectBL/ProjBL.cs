@@ -8,10 +8,10 @@ using ProjectModels;
 
 namespace ProjectBL
 {
-    public class ProjectBL : IProjectBL
+    public class ProjBL : IProjectBL
     {
         private IProjectRepoDB _repo;
-        public ProjectBL(IProjectRepoDB repo)
+        public ProjBL(IProjectRepoDB repo)
         {
             _repo = repo;
         }
