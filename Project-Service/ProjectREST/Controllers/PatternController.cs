@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Project_Service.Controllers
+namespace ProjectREST.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
