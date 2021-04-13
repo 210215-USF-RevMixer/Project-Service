@@ -165,7 +165,12 @@ namespace ProjectBL
         //SampleSets 
         public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets)
         {
-            return await _repo.AddSampleSetsAsync(newSampleSets);
+            newSampleSets = await _repo.AddSampleSetsAsync(newSampleSets);
+            UsersSampleSets usersSampleSets = new UsersSampleSets();
+            usersSampleSets.SampleSetsId = newSampleSets.Id;
+            await _repo.AddUsersSampleSetsAsync(usersSampleSets);
+            return await _repo.GetSampleSetsByIDAsync(newSampleSets.Id);
+
         }
         public async Task<SampleSets> DeleteSampleSetsAsync(SampleSets sampleSets2BDeleted)
         {

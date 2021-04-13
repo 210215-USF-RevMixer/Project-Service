@@ -14,7 +14,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-<<<<<<< HEAD
   </ItemGroup>
 <ItemGroup>
     <ProjectReference Include="..\ProjectBL\ProjectBL.csproj" />
@@ -22,17 +21,4 @@
     <ProjectReference Include="..\ProjectModels\ProjectModels.csproj" />
      <ProjectReference Include="..\ProjectREST\ProjectRest.csproj" />
   </ItemGroup>
-=======
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectBL\ProjectBL.csproj" />
-    <ProjectReference Include="..\ProjectREST\ProjectRest.csproj" />
-  </ItemGroup>
-
->>>>>>> cb24e4d8231d6d7530a72e5fb1794dd4aaecde4d
 </Project>
