@@ -114,7 +114,11 @@ namespace ProjectBL
         public async Task<Sample> AddSampleAsync(Sample newSample)
         {
             //Todo: Add BL
-            return await _repo.AddSampleAsync(newSample);
+            newSample =  await _repo.AddSampleAsync(newSample);
+            UsersSample usersSample = new UsersSample();
+            usersSample.SampleId = newSample.Id;
+            return await _repo.GetSampleByIDAsync(newSample.Id);
+
         }
         public async Task<Sample> DeleteSampleAsync(Sample sample2BDeleted)
         {
