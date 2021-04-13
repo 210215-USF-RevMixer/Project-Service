@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ProjectDL;
+using ProjectBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace Project_Service
             });
             services.AddDbContext<ProjectDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")));
             services.AddScoped<IProjectRepoDB, ProjectRepoDB>();
+            services.AddScoped<IProjectBL, ProjBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
