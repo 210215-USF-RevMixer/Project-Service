@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'TateDockerHub'
+    repository: 'revmix-project-service'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
