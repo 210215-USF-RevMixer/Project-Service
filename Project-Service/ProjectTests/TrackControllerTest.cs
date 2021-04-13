@@ -1,6 +1,6 @@
 using ProjectBL;
 using ProjectModels;
-using ProjectREST.Controllers;
+using Project_Service.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -41,7 +41,7 @@ namespace ProjectTests
             var track = new Track { Id = trackId };
             _projectBLMock.Setup(x => x.GetTrackByIDAsync(It.IsAny<int>())).Returns(Task.FromResult(track));
             var trackController = new TrackController(_projectBLMock.Object);
-            var result = await trackController.GetSampleByIDAsync(trackId);
+            var result = await trackController.GetTrackByIDAsync(trackId);
             Assert.Equal(trackId, ((Track)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetTrackByIDAsync(trackId));
         }
