@@ -197,19 +197,6 @@ namespace ProjectTests
             Assert.IsType<StatusCodeResult>(result);
             Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
         }
-        /*
-              [HttpDelete("{savedProjectID}")]
-    public async Task<IActionResult> DeleteSavedProjectAsync(int savedProjectID)
-    {
-        try
-        {
-            await _projectBL.DeleteSavedProjectAsync(await _projectBL.GetSavedProjectByIDAsync(savedProjectID));
-            return NoContent();
-        }
-        catch
-        {
-            return StatusCode(500);
-        }*/
     }
 
 
