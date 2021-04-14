@@ -35,6 +35,17 @@ namespace Project_Service
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Project_Service", Version = "v1" });
             });
+            services.AddCors(
+                options =>
+                {
+                    options.AddDefaultPolicy(
+                        builder =>
+                        {
+                            builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                        });
+                });
             services.AddDbContext<ProjectDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")));
             services.AddScoped<IProjectRepoDB, ProjectRepoDB>();
             services.AddScoped<IProjectBL, ProjBL>();
@@ -49,6 +60,13 @@ namespace Project_Service
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Project_Service v1"));
             }
+
+            app.UseCors(x =>
+            x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            );
 
             app.UseHttpsRedirection();
 
