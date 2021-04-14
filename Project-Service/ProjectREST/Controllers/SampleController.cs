@@ -39,11 +39,11 @@ namespace ProjectREST.Controllers
         // POST api/<ValuesController>
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddSampleAsync([FromBody] Sample sample)
+        public async Task<IActionResult> AddSampleAsync([FromBody] Sample sample, int userId)
         {
             try
             {
-                await _projectBL.AddSampleAsync(sample);
+                await _projectBL.AddSampleAsync(sample, userId);
                 Log.Logger.Information($"new Sample with ID {sample.Id} created");
                 return CreatedAtAction("AddSample", sample);
             }

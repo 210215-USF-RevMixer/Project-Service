@@ -111,12 +111,14 @@ namespace ProjectBL
         }
 
         //Sample
-        public async Task<Sample> AddSampleAsync(Sample newSample)
+        public async Task<Sample> AddSampleAsync(Sample newSample, int userId)
         {
             //Todo: Add BL
             newSample =  await _repo.AddSampleAsync(newSample);
             UsersSample usersSample = new UsersSample();
             usersSample.SampleId = newSample.Id;
+            usersSample.UserId = userId;
+            await _repo.AddUsersSampleAsync(usersSample);
             return await _repo.GetSampleByIDAsync(newSample.Id);
 
         }
@@ -167,11 +169,12 @@ namespace ProjectBL
         }
 
         //SampleSets 
-        public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets)
+        public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets, int userId)
         {
             newSampleSets = await _repo.AddSampleSetsAsync(newSampleSets);
             UsersSampleSets usersSampleSets = new UsersSampleSets();
             usersSampleSets.SampleSetsId = newSampleSets.Id;
+            usersSampleSets.UserId = userId;
             await _repo.AddUsersSampleSetsAsync(usersSampleSets);
             return await _repo.GetSampleSetsByIDAsync(newSampleSets.Id);
 
