@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Storage.Blobs;
 
 namespace Project_Service
 {
@@ -49,6 +50,7 @@ namespace Project_Service
             services.AddDbContext<ProjectDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")));
             services.AddScoped<IProjectRepoDB, ProjectRepoDB>();
             services.AddScoped<IProjectBL, ProjBL>();
+            services.AddScoped<BlobServiceClient>(sp => new BlobServiceClient(Configuration.GetConnectionString("BlobStorage")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
