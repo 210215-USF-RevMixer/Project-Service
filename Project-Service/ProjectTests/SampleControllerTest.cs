@@ -49,11 +49,13 @@ namespace ProjectTests
         public async Task AddSampleShouldAddSample()
         {
             var sample = new Sample();
-            _projectBLMock.Setup(x => x.AddSampleAsync(It.IsAny<Sample>())).Returns(Task.FromResult<Sample>(sample));
+            _projectBLMock.Setup(x => x.AddSampleAsync(It.IsAny<Sample>(), It.IsAny<int>())).Returns(Task.FromResult<Sample>(sample));
             var sampleController = new SampleController(_projectBLMock.Object);
-            var result = await sampleController.AddSampleAsync(new Sample());
+
+            var result = await sampleController.AddSampleAsync(new Sample(), 1024);
+
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
-            _projectBLMock.Verify(x => x.AddSampleAsync((It.IsAny<Sample>())));
+            _projectBLMock.Verify(x => x.AddSampleAsync((It.IsAny<Sample>()), It.IsAny<int>()));
         }
         [Fact]
         public async Task DeleteSampleShouldDeleteSample()
