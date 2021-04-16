@@ -113,10 +113,19 @@ namespace ProjectBL
         //Sample
         public async Task<Sample> AddSampleAsync(Sample newSample, int userId)
         {
+            //Sample sample2Add = new Sample();
+            //sample2Add.SampleLink = newSample.SampleLink;
+            //sample2Add.SampleName = newSample.SampleName;
+            //sample2Add.Track = newSample.Track;
+            //sample2Add.IsApproved = newSample.IsApproved;
+            //sample2Add.IsLocked = newSample.IsLocked;
+            //sample2Add.IsPrivate = newSample.IsPrivate;
+
             //Todo: Add BL
             newSample =  await _repo.AddSampleAsync(newSample);
             UsersSample usersSample = new UsersSample();
             usersSample.SampleId = newSample.Id;
+            usersSample.IsOwner = true;
             usersSample.UserId = userId;
             await _repo.AddUsersSampleAsync(usersSample);
             return await _repo.GetSampleByIDAsync(newSample.Id);
