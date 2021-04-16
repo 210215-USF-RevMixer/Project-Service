@@ -12,22 +12,23 @@ namespace ProjectTests
 {
     public class ProjectMockTests
     {
-        [Fact]
-        public async Task AddUserProjectAsync_ShouldReturnCreatedAtActionResult_WhenUserProjectIsValid()
-        {
-            //arrange
-            var projectBLMock = new Mock<IProjectBL>();
-            UserProject userProject = new UserProject();
-            projectBLMock.Setup(i => i.AddUserProjectAsync(userProject)).ReturnsAsync(userProject);
-            UserProjectController userProjectController = new UserProjectController(projectBLMock.Object);
+        
+        //[Fact]
+        //public async Task AddUserProjectAsync_ShouldReturnCreatedAtActionResult_WhenUserProjectIsValid()
+        //{
+        //    //arrange
+        //    var projectBLMock = new Mock<IProjectBL>();
+        //    UserProject userProject = new UserProject();
+        //    projectBLMock.Setup(i => i.AddUserProjectAsync(userProject)).ReturnsAsync(userProject);
+        //    UserProjectController userProjectController = new UserProjectController(projectBLMock.Object);
 
-            //act
-            var result = await userProjectController.AddUserProjectAsync(userProject);
+        //    //act
+        //    var result = await userProjectController.AddUserProjectAsync(userProject);
 
-            //assert
-            Assert.IsType<CreatedAtActionResult>(result);
+        //    //assert
+        //    Assert.IsType<CreatedAtActionResult>(result);
 
-        }
+        //}
 
         [Fact]
         public async Task AddUserProjectAsync_ShouldReturnStatusCode400_WhenUserProjectIsInvalid()

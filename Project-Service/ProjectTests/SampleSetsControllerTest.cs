@@ -52,7 +52,7 @@ namespace ProjectTests
             _projectBLMock.Setup(x => x.AddSampleSetsAsync(It.IsAny<SampleSets>(), It.IsAny<int>())).Returns(Task.FromResult<SampleSets>(sample));
             var sampleController = new SampleSetsController(_projectBLMock.Object);
 
-            var result = await sampleController.AddSampleSetsAsync(new SampleSets(), 1024);
+            var result = await sampleController.AddSampleSetsAsync();
 
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddSampleSetsAsync((It.IsAny<SampleSets>()), It.IsAny<int>()));

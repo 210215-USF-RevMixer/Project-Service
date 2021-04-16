@@ -10,11 +10,98 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.Mvc;
 using ProjectREST.Controllers;
+using ProjectDL;
 
 namespace ProjectTests
 {
     public class SavedProjectMockTests
     {
+        private Mock<IProjectRepoDB> _projectBLMock;
+        public SavedProjectMockTests()
+        {
+            _projectBLMock = new Mock<IProjectRepoDB>();
+        }
+
+        [Fact]
+        public async Task GetSavedProjectsAsync_ShouldReturnSavedProjects()
+        {
+            //arrange
+            var savedProjects = new List<SavedProject> { new SavedProject() { Id = 1 } };
+            _projectBLMock.Setup(i => i.GetSavedProjectsAsync());
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.GetSavedProjectsAsync();
+
+            //assert
+            Assert.Single(savedProjects);
+            _projectBLMock.Verify(i => i.GetSavedProjectsAsync());
+        }
+
+        [Fact]
+        public async Task GetSavedProjectsByIDAsync_ShouldReturnSavedProject_WhenIdIsValid()
+        {
+            //arrange
+            var savedProjID = 1;
+            var newSavedProj = new SavedProject();
+            _projectBLMock.Setup(i => i.GetSavedProjectByIDAsync(It.IsAny<int>())).Returns(Task.FromResult<SavedProject>(newSavedProj));
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.GetSavedProjectByIDAsync(savedProjID);
+
+            //assert
+            Assert.Equal(newSavedProj, result);
+            _projectBLMock.Verify(i => i.GetSavedProjectByIDAsync(It.IsAny<int>()));
+        }
+
+        [Fact]
+        public async Task AddSavedProjectAsync_ShouldReturnNewSavedProject_WhenSavedProjectIsValid()
+        {
+            //arrange
+            var newSavedProj = new SavedProject();
+            _projectBLMock.Setup(i => i.AddSavedProjectAsync(It.IsAny<SavedProject>())).Returns(Task.FromResult<SavedProject>(newSavedProj));
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.AddSavedProjectAsync(newSavedProj);
+
+            //assert
+            Assert.Equal(newSavedProj, result);
+            _projectBLMock.Verify(i => i.AddSavedProjectAsync(It.IsAny<SavedProject>()));
+        }
+
+        [Fact]
+        public async Task DeleteSavedProjectAsync_ShouldReturnProject2BDeleted_WhenSavedProjectIsValid()
+        {
+            //arrange
+            var newSavedProject = new SavedProject();
+            _projectBLMock.Setup(i => i.DeleteSavedProjectAsync(It.IsAny<SavedProject>())).Returns(Task.FromResult<SavedProject>(newSavedProject));
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.DeleteSavedProjectAsync(newSavedProject);
+
+            //assert
+            Assert.Equal(newSavedProject, result);
+            _projectBLMock.Verify(i => i.DeleteSavedProjectAsync(It.IsAny<SavedProject>()));
+        }
+
+        [Fact]
+        public async Task UpdateSavedProjectAsync_ShouldReturnOldSavedProject_WhenSavedProjectIsValid()
+        {
+            //arrange
+            var newSavedProj = new SavedProject();
+            _projectBLMock.Setup(i => i.UpdateSavedProjectAsync(It.IsAny<SavedProject>())).Returns(Task.FromResult<SavedProject>(newSavedProj));
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.UpdateSavedProjectAsync(newSavedProj);
+
+            //assert
+            Assert.Equal(newSavedProj, result);
+            _projectBLMock.Verify(i => i.UpdateSavedProjectAsync(It.IsAny<SavedProject>()));
+        }
         //[Fact]
         //public async Task GetSavedProjectsAsync_ShouldReturnOkObjectResult()
         //{
