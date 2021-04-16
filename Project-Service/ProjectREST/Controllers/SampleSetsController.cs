@@ -39,13 +39,16 @@ namespace ProjectREST.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        [Consumes("application/json")]
-        public async Task<IActionResult> AddSampleSetsAsync([FromBody] SampleSets sampleSets, int userId)
+        public async Task<IActionResult> AddSampleSetsAsync()
         {
             try
             {
-                await _projectBL.AddSampleSetsAsync(sampleSets, userId);
-                Log.Logger.Information($"new SampleSets with ID {sampleSets.Id} created");
+                SampleSets sampleSets = new SampleSets();
+                sampleSets.Name = Request.Form["name"];
+                sampleSets.Id = 0;
+                string userId = Request.Form["userId"];
+                await _projectBL.AddSampleSetsAsync(sampleSets, int.Parse(userId));
+                //Log.Logger.Information($"new SampleSets with ID {sampleSets.Id} created");
                 return CreatedAtAction("AddSampleSets", sampleSets);
             }
             catch (Exception e)
