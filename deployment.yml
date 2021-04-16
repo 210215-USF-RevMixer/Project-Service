@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-service-deployment
+spec:
+  selector:
+    matchLabels:
+      app: project-service
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: project-service
+    spec:
+      containers:
+      - name: project-service
+        image: wyspar123/projectservice:#{BuildTag}#
+        ports:
+        - containerPort: 80
+kind: Service
+apiVersion: v1
+metadata:
+  name: project-service
+spec:
+  selector:
+    app: project-service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
