@@ -26,8 +26,8 @@ namespace ProjectTests
         public async Task AddUserProjectAsync_ShouldReturnNewUserProject_WhenUserProjectIsValid()
         {
             //arrange
-            var userProject = new UserProject 
-            { 
+            var userProject = new UserProject
+            {
                 Id = 7,
                 ProjectId = 1,
                 UserId = 1
@@ -41,7 +41,7 @@ namespace ProjectTests
             //assert
             Assert.Equal(userProject.ProjectId, result.ProjectId);
         }
-   
+
 
         [Fact]
         public async Task AddSavedProjectAsync_ShouldReturnNewSavedProject_WhenSavedProjectIsValid()
@@ -63,14 +63,14 @@ namespace ProjectTests
         public async Task AddTrackAsync_ShouldReturnTrack_WhenTrackIsValid()
         {
             //arrange
-            Track track = new Track 
-                {
-                    Id = 3,
-                    ProjectId = 1,
-                    PatternId = 1, 
-                    SampleId= 1
-                };
-      
+            Track track = new Track
+            {
+                Id = 3,
+                ProjectId = 1,
+                PatternId = 1,
+                SampleId = 1
+            };
+
             ProjectDBContext projectDBContext = new ProjectDBContext(options);
             ProjectRepoDB projectRepoDB = new ProjectRepoDB(projectDBContext);
 
@@ -80,7 +80,7 @@ namespace ProjectTests
             //assert
             Assert.Equal(track.ProjectId, result.ProjectId);
         }
-   
+
 
         [Fact]
         public async Task GetSavedProjectsAsync_ShouldReturnSavedProject()
@@ -110,7 +110,7 @@ namespace ProjectTests
             Assert.Equal(2, result.Count);
         }
 
-    
+
 
         [Fact]
         public async Task GetSavedProjectByIDAsync_ShouldReturnSavedProject_WhenIDIsValid()
@@ -160,6 +160,55 @@ namespace ProjectTests
         }
 
         [Fact]
+        public async Task GetUserProjectsAsync_ShouldReturnUserProjects()
+        {
+            //arrange
+            var projectDBContext = new ProjectDBContext(options);
+            var projectRepoDB = new ProjectRepoDB(projectDBContext);
+
+            //act
+            var result = await projectRepoDB.GetUserProjectsAsync();
+
+            //assert
+            Assert.Equal(2, result.Count);
+        }
+
+        [Fact]
+        public async Task GetUserProjectByIDAsync_ShouldReturnUserProject_WhenIdIsValid()
+        {
+            //arrange
+            int id = 1;
+            var projectDBContext = new ProjectDBContext(options);
+            var projectRepoDB = new ProjectRepoDB(projectDBContext);
+
+            //act
+            var result = await projectRepoDB.GetUserProjectByIDAsync(id);
+
+            //assert
+            Assert.Equal(1, result.Id);
+        }
+
+        [Fact]
+        public async Task GetUserProjectByIDAsync_ShouldReturnNull_WhenIdIsInvalid()
+        {
+            //arrange
+            int id = 22;
+            var projectDBContext = new ProjectDBContext(options);
+            var projectRepoDB = new ProjectRepoDB(projectDBContext);
+
+            //act 
+            var result = await projectRepoDB.GetUserProjectByIDAsync(id);
+
+            //assert
+            Assert.Null(result);
+
+        }
+
+
+
+
+
+        [Fact]
         public async Task DeleteSavedProjectAsync_ShouldReturnDeletedProject_WhenSavedProjectIsValid()
         {
             //arrange 
@@ -175,7 +224,7 @@ namespace ProjectTests
         }
 
         [Fact]
-        public async Task DeleteSavedProjectAsync_ShouldReturnNull_WhenSavedProjectIsInvalid()
+        public async Task DeleteSavedProjectAsync_ShouldReturnArgumentNullException_WhenSavedProjectIsInvalid()
         {
             try
             {
@@ -203,7 +252,7 @@ namespace ProjectTests
         {
             //arrange
             int id = 1;
-            
+
             var projectDBContext = new ProjectDBContext(options);
             var projectRepoDB = new ProjectRepoDB(projectDBContext);
             var track2BDeleted = projectDBContext.Track.Where(i => i.Id == id).FirstOrDefault();
@@ -214,13 +263,47 @@ namespace ProjectTests
             //assert
             Assert.Equal(1, result.ProjectId);
         }
-        /*
-    public async Task<Track> DeleteTrackAsync(Track track2BDeleted)
-    {
-        _context.Track.Remove(track2BDeleted);
-        await _context.SaveChangesAsync();
-        return track2BDeleted;
-    }*/
+
+        [Fact]
+        public async Task DeleteUserProjectAsync_ShouldReturnUserProject2BDeleted_WhenUserProjectIsValid()
+        {
+            //arrange 
+            int id = 1;
+            var projectDBContext = new ProjectDBContext(options);
+            var projectRepoDB = new ProjectRepoDB(projectDBContext);
+            var userProject2BDeleted = projectDBContext.UserProject.Where(i => i.Id == id).FirstOrDefault();
+
+            //act
+            var result = await projectRepoDB.DeleteUserProjectAsync(userProject2BDeleted);
+
+            //assert
+            Assert.Equal(1, result.ProjectId);
+        }
+
+        [Fact]
+        public async Task DeleteUserProjectAsync_ShouldReturnArgumentNullException_WhenUserProjectIsInvalid()
+        {
+            try
+            {
+                //arrange 
+                int id = 44;
+                var projectDBContext = new ProjectDBContext(options);
+                var projectRepoDB = new ProjectRepoDB(projectDBContext);
+                var userProject2BDeleted = projectDBContext.UserProject.Where(i => i.Id == id).FirstOrDefault();
+
+                //act
+                var result = await projectRepoDB.DeleteUserProjectAsync(userProject2BDeleted);
+            }
+            catch (Exception ex)
+            {
+
+                //assert
+                Assert.IsType<ArgumentNullException>(ex);
+
+            }
+
+
+        }
 
         [Fact]
         public async Task UpdateSavedProjectAsync_ShouldReturnSavedProject_WhenSavedProjectIsValid()
@@ -273,7 +356,8 @@ namespace ProjectTests
         public async Task UpdateTrackAsync_ShouldReturnTrack_WhenTrackIsValid()
         {
             //arrange
-            var track = new Track {
+            var track = new Track
+            {
                 Id = 1,
                 PatternId = 1,
                 ProjectId = 2,
@@ -289,7 +373,27 @@ namespace ProjectTests
             Assert.Equal(track.ProjectId, result.ProjectId);
         }
 
-    
+        [Fact]
+        public async Task UpdateUserProjectAsync_ShouldReturnUserProject2BUpdated_WhenUserProjectIsValid()
+        {
+            //arrange
+            var userProject2BUpdated = new UserProject
+            {
+                Id = 1,
+                ProjectId = 8,
+                UserId = 1
+            };
+            var projectDBContext = new ProjectDBContext(options);
+            var projectRepoDB = new ProjectRepoDB(projectDBContext);
+
+            //act
+            var result = await projectRepoDB.UpdateUserProjectAsync(userProject2BUpdated);
+
+            //assert
+            Assert.Equal(userProject2BUpdated.ProjectId, result.ProjectId);
+
+        }
+
 
 
         private void Seed()
@@ -315,16 +419,16 @@ namespace ProjectTests
 
                 );
                 context.Track.AddRange(
-                    new Track 
-                    { 
+                    new Track
+                    {
                         Id = 1,
-                        PatternId=1,
+                        PatternId = 1,
                         ProjectId = 1,
                         SampleId = 1
-                    
-                    }, 
+
+                    },
                     new Track
-                    { 
+                    {
                         Id = 2,
                         SampleId = 2,
                         ProjectId = 2,
@@ -335,12 +439,12 @@ namespace ProjectTests
                     new Sample
                     {
                         Id = 1
-                        
+
                     },
-                    
+
                     new Sample
-                    { 
-                        Id=2
+                    {
+                        Id = 2
                     }
                );
                 context.Pattern.AddRange(
@@ -348,8 +452,8 @@ namespace ProjectTests
                     {
                         Id = 1
                     },
-                    new Pattern 
-                    { 
+                    new Pattern
+                    {
                         Id = 2
                     }
                );
@@ -359,11 +463,11 @@ namespace ProjectTests
                     {
                         Id = 1,
                         UserId = 1,
-                        ProjectId= 1
+                        ProjectId = 1
                     },
-                    new UserProject 
+                    new UserProject
                     {
-                        Id =2,
+                        Id = 2,
                         ProjectId = 2,
                         UserId = 2
                     }
