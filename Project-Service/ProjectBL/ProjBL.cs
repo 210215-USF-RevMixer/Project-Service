@@ -125,6 +125,7 @@ namespace ProjectBL
             newSample =  await _repo.AddSampleAsync(newSample);
             UsersSample usersSample = new UsersSample();
             usersSample.SampleId = newSample.Id;
+            usersSample.IsOwner = true;
             usersSample.UserId = userId;
             await _repo.AddUsersSampleAsync(usersSample);
             return await _repo.GetSampleByIDAsync(newSample.Id);
