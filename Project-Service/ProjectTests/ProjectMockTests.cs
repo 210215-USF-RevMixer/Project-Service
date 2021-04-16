@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-<<<<<<< HEAD
-=======
 using ProjectREST.Controllers;
->>>>>>> main
 using ProjectBL;
 using ProjectModels;
 using ProjectREST.Controllers;

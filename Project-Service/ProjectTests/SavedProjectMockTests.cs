@@ -1,8 +1,5 @@
 ﻿using Moq;
-<<<<<<< HEAD
-=======
 using ProjectREST.Controllers;
->>>>>>> main
 using ProjectBL;
 using ProjectModels;
 using System;
