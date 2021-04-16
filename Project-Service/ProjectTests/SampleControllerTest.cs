@@ -55,8 +55,9 @@ namespace ProjectTests
             var result = await sampleController.AddSampleAsync();
 
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
-            _projectBLMock.Verify(x => x.AddSampleAsync((It.IsAny<Sample>()), It.IsAny<int>()));
+            _projectBLMock.Verify(x => x.AddSampleAsync(It.IsAny<Sample>(), It.IsAny<int>()));
         }
+
         [Fact]
         public async Task DeleteSampleShouldDeleteSample()
         {
