@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectBL;
 using ProjectModels;
 using Serilog;
@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProjectREST.Controllers
 {
@@ -40,15 +39,15 @@ namespace ProjectREST.Controllers
         // POST api/<ValuesController>
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddSampleAsync([FromBody] Sample sample)
+        public async Task<IActionResult> AddSampleAsync([FromBody] Sample sample, int userId)
         {
             try
             {
-                await _projectBL.AddSampleAsync(sample);
+                await _projectBL.AddSampleAsync(sample, userId);
                 Log.Logger.Information($"new Sample with ID {sample.Id} created");
                 return CreatedAtAction("AddSample", sample);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Logger.Error($"Error thrown: {e.Message}");
                 return StatusCode(400);

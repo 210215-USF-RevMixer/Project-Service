@@ -9,9 +9,9 @@ namespace ProjectBL
 {
     public interface IProjectBL
     {
-        Task<Sample> AddSampleAsync(Sample newSample);
+        Task<Sample> AddSampleAsync(Sample newSample, int userId);
         Task<SamplePlaylist> AddSamplePlaylistAsync(SamplePlaylist newSamplePlaylist);
-        Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets);
+        Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets, int userId);
         Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject);
         Task<Track> AddTrackAsync(Track newTrack);
         Task<Pattern> AddPatternAsync(Pattern newPattern);

@@ -111,10 +111,16 @@ namespace ProjectBL
         }
 
         //Sample
-        public async Task<Sample> AddSampleAsync(Sample newSample)
+        public async Task<Sample> AddSampleAsync(Sample newSample, int userId)
         {
             //Todo: Add BL
-            return await _repo.AddSampleAsync(newSample);
+            newSample =  await _repo.AddSampleAsync(newSample);
+            UsersSample usersSample = new UsersSample();
+            usersSample.SampleId = newSample.Id;
+            usersSample.UserId = userId;
+            await _repo.AddUsersSampleAsync(usersSample);
+            return await _repo.GetSampleByIDAsync(newSample.Id);
+
         }
         public async Task<Sample> DeleteSampleAsync(Sample sample2BDeleted)
         {
@@ -163,9 +169,15 @@ namespace ProjectBL
         }
 
         //SampleSets 
-        public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets)
+        public async Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets, int userId)
         {
-            return await _repo.AddSampleSetsAsync(newSampleSets);
+            newSampleSets = await _repo.AddSampleSetsAsync(newSampleSets);
+            UsersSampleSets usersSampleSets = new UsersSampleSets();
+            usersSampleSets.SampleSetsId = newSampleSets.Id;
+            usersSampleSets.UserId = userId;
+            await _repo.AddUsersSampleSetsAsync(usersSampleSets);
+            return await _repo.GetSampleSetsByIDAsync(newSampleSets.Id);
+
         }
         public async Task<SampleSets> DeleteSampleSetsAsync(SampleSets sampleSets2BDeleted)
         {

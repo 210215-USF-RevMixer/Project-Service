@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectBL;
 using ProjectModels;
 using Serilog;
@@ -40,15 +40,15 @@ namespace ProjectREST.Controllers
         // POST api/<ValuesController>
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddSampleSetsAsync([FromBody] SampleSets sampleSets)
+        public async Task<IActionResult> AddSampleSetsAsync([FromBody] SampleSets sampleSets, int userId)
         {
             try
             {
-                await _projectBL.AddSampleSetsAsync(sampleSets);
+                await _projectBL.AddSampleSetsAsync(sampleSets, userId);
                 Log.Logger.Information($"new SampleSets with ID {sampleSets.Id} created");
-                return CreatedAtAction("AddSample", sampleSets);
+                return CreatedAtAction("AddSampleSets", sampleSets);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Logger.Error($"Error thrown: {e.Message}");
                 return StatusCode(400);

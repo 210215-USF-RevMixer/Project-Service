@@ -10,7 +10,7 @@ COPY ProjectBL/*.csproj ProjectBL/
 COPY ProjectDL/*.csproj ProjectDL/
 COPY ProjectModels/*.csproj ProjectModels/
 COPY ProjectREST/*.csproj ProjectREST/
-#COPY ProjectTest/*.csproj ProjectTest/
+COPY ProjectTests/*.csproj ProjectTests/
 
 # Restores any dependencies the projects would need
 RUN dotnet restore
