@@ -47,7 +47,7 @@ namespace Project_Service
                             .AllowAnyHeader();
                         });
                 });
-            services.AddDbContext<ProjectDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")));
+            services.AddDbContext<ProjectDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProjectDB")));
             services.AddScoped<IProjectRepoDB, ProjectRepoDB>();
             services.AddScoped<IProjectBL, ProjBL>();
             services.AddScoped<BlobServiceClient>(sp => new BlobServiceClient(Configuration.GetConnectionString("BlobStorage")));
