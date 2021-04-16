@@ -133,7 +133,7 @@ ICollection\<Track>|tracks
 
 Get | Post 
 ----|----
-/api/Sample | /api/Sample 
+/api/Sample | /api/Sample?userId={id}
 /api/Sample/{id} | 
 
 </td><td>
@@ -148,7 +148,7 @@ Get | Post
 
 Get | Post 
 ----|----
-/api/SampleSets | /api/SampleSets 
+/api/SampleSets | /api/SampleSets?userId={id}
 /api/SampleSets/{id} | 
 
 </td><td>
