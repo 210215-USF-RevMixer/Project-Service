@@ -23,6 +23,27 @@ namespace ProjectTests
         }
 
         [Fact]
+        public async Task AddUserProjectAsync_ShouldReturnNewUserProject_WhenUserProjectIsValid()
+        {
+            //arrange
+            var userProject = new UserProject 
+            { 
+                Id = 7,
+                ProjectId = 1,
+                UserId = 1
+            };
+            var projectDBContext = new ProjectDBContext(options);
+            var projectrepoDB = new ProjectRepoDB(projectDBContext);
+
+            //act
+            var result = await projectrepoDB.AddUserProjectAsync(userProject);
+
+            //assert
+            Assert.Equal(userProject.ProjectId, result.ProjectId);
+        }
+   
+
+        [Fact]
         public async Task AddSavedProjectAsync_ShouldReturnNewSavedProject_WhenSavedProjectIsValid()
         {
             //arrange
@@ -42,8 +63,14 @@ namespace ProjectTests
         public async Task AddTrackAsync_ShouldReturnTrack_WhenTrackIsValid()
         {
             //arrange
-            Track track = new Track();
-            track.Id = 1;
+            Track track = new Track 
+                {
+                    Id = 3,
+                    ProjectId = 1,
+                    PatternId = 1, 
+                    SampleId= 1
+                };
+      
             ProjectDBContext projectDBContext = new ProjectDBContext(options);
             ProjectRepoDB projectRepoDB = new ProjectRepoDB(projectDBContext);
 
@@ -51,21 +78,14 @@ namespace ProjectTests
             var result = await projectRepoDB.AddTrackAsync(track);
 
             //assert
-            Assert.Equal(track.Id, result.Id);
+            Assert.Equal(track.ProjectId, result.ProjectId);
         }
-        /* public async Task<Track> AddTrackAsync(Track newTrack)
-    {
-        await _context.Track.AddAsync(newTrack);
-        await _context.SaveChangesAsync();
-        return newTrack;
-    }*/
+   
 
         [Fact]
         public async Task GetSavedProjectsAsync_ShouldReturnSavedProject()
         {
             //arrange
-            List<SavedProject> savedProjects = new List<SavedProject>();
-
             var projectDBContext = new ProjectDBContext(options);
             var projectRepoDB = new ProjectRepoDB(projectDBContext);
 
@@ -73,14 +93,13 @@ namespace ProjectTests
             var result = await projectRepoDB.GetSavedProjectsAsync();
 
             //assert
-            Assert.Equal(savedProjects, result);
+            Assert.Equal(2, result.Count);
         }
 
         [Fact]
         public async Task GetTracksAsync_ShouldReturnTrack()
         {
             //arrange
-            List<Track> tracks = new List<Track>();
             var projectDBContext = new ProjectDBContext(options);
             ProjectRepoDB projectRepoDB = new ProjectRepoDB(projectDBContext);
 
@@ -88,7 +107,7 @@ namespace ProjectTests
             var result = await projectRepoDB.GetTracksAsync();
 
             //assert
-            Assert.Equal(tracks, result);
+            Assert.Equal(2, result.Count);
         }
 
     
@@ -112,7 +131,7 @@ namespace ProjectTests
         public async Task GetTrackByIDAsync_ShouldReturnTrack()
         {
             //arrange
-            Track track = new Track();
+            //Track track = new Track();
             int id = 1;
             var projectDBContext = new ProjectDBContext(options);
             var projectrepoDB = new ProjectRepoDB(projectDBContext);
@@ -121,20 +140,9 @@ namespace ProjectTests
             var result = await projectrepoDB.GetTrackByIDAsync(id);
 
             //assert
-            Assert.Equal(track, result);
+            Assert.Equal(1, result.ProjectId);
         }
 
-        /* public async Task<Track> GetTrackByIDAsync(int trackID)
-        {
-            return await _context.Track
-                .Include(track => track.Pattern)
-                .AsNoTracking()
-                .Include(track => track.Sample)
-                .AsNoTracking()
-                .Include(track => track.SavedProject)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(track => track.Id == trackID);
-        }*/
 
         [Fact]
         public async Task GetSavedProjectByIDAsync_ShouldReturnNull_WhenIDIsInvalid()
@@ -195,7 +203,7 @@ namespace ProjectTests
         {
             //arrange
             int id = 1;
-            Track track = new Track();
+            
             var projectDBContext = new ProjectDBContext(options);
             var projectRepoDB = new ProjectRepoDB(projectDBContext);
             var track2BDeleted = projectDBContext.Track.Where(i => i.Id == id).FirstOrDefault();
@@ -204,7 +212,7 @@ namespace ProjectTests
             var result = await projectRepoDB.DeleteTrackAsync(track2BDeleted);
 
             //assert
-            //Assert.Equal()
+            Assert.Equal(1, result.ProjectId);
         }
         /*
     public async Task<Track> DeleteTrackAsync(Track track2BDeleted)
@@ -265,7 +273,12 @@ namespace ProjectTests
         public async Task UpdateTrackAsync_ShouldReturnTrack_WhenTrackIsValid()
         {
             //arrange
-            var track = new Track { Id = 1};
+            var track = new Track {
+                Id = 1,
+                PatternId = 1,
+                ProjectId = 2,
+                SampleId = 1
+            };
             var projectDBContext = new ProjectDBContext(options);
             var projectRepoDB = new ProjectRepoDB(projectDBContext);
 
@@ -273,21 +286,10 @@ namespace ProjectTests
             var result = await projectRepoDB.UpdateTrackAsync(track);
 
             //assert
-            Assert.Equal(track.Id, result.Id);
+            Assert.Equal(track.ProjectId, result.ProjectId);
         }
 
-        /*public async Task<Track> UpdateTrackAsync(Track track2BUpdated)
-        {
-            Track oldTrack = await _context.Track.Where(t => t.Id == track2BUpdated.Id).FirstOrDefaultAsync();
-
-            _context.Entry(oldTrack).CurrentValues.SetValues(track2BUpdated);
-
-            await _context.SaveChangesAsync();
-
-            _context.ChangeTracker.Clear();
-            return track2BUpdated;
-        }
-*/
+    
 
 
         private void Seed()
@@ -310,10 +312,62 @@ namespace ProjectTests
                         BPM = 0,
                         ProjectName = "test2"
                     }
-                  
-                    );
 
+                );
+                context.Track.AddRange(
+                    new Track 
+                    { 
+                        Id = 1,
+                        PatternId=1,
+                        ProjectId = 1,
+                        SampleId = 1
+                    
+                    }, 
+                    new Track
+                    { 
+                        Id = 2,
+                        SampleId = 2,
+                        ProjectId = 2,
+                        PatternId = 2
+                    }
+                );
+                context.Sample.AddRange(
+                    new Sample
+                    {
+                        Id = 1
+                        
+                    },
+                    
+                    new Sample
+                    { 
+                        Id=2
+                    }
+               );
+                context.Pattern.AddRange(
+                    new Pattern
+                    {
+                        Id = 1
+                    },
+                    new Pattern 
+                    { 
+                        Id = 2
+                    }
+               );
 
+                context.UserProject.AddRange(
+                    new UserProject
+                    {
+                        Id = 1,
+                        UserId = 1,
+                        ProjectId= 1
+                    },
+                    new UserProject 
+                    {
+                        Id =2,
+                        ProjectId = 2,
+                        UserId = 2
+                    }
+              );
                 context.SaveChanges();
             }
         }
