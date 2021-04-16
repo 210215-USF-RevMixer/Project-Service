@@ -15,9 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Project_Service
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
