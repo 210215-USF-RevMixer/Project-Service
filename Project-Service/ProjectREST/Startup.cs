@@ -15,9 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Project_Service
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -47,7 +49,7 @@ namespace Project_Service
                             .AllowAnyHeader();
                         });
                 });
-            services.AddDbContext<ProjectDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")));
+            services.AddDbContext<ProjectDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProjectDB")));
             services.AddScoped<IProjectRepoDB, ProjectRepoDB>();
             services.AddScoped<IProjectBL, ProjBL>();
             services.AddScoped<BlobServiceClient>(sp => new BlobServiceClient(Configuration.GetConnectionString("BlobStorage")));
