@@ -106,7 +106,18 @@ namespace ProjectTests
         [Fact]
         public async Task DeletePatternAsync_ShouldReturnStatusCode500_WhenPatternIsInvalid() 
         {
-            
+            //arrange
+            int id = 1;
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.DeletePatternAsync(pattern)).Throws(new Exception());
+            PatternController patternController = new PatternController(_projectBLMock.Object);
+
+            //act
+            var result = await patternController.DeletePatternAsync(id);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
         }
 
         /* public async Task<IActionResult> DeletePatternAsync(int patternID)

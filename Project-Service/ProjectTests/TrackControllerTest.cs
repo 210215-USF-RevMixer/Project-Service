@@ -46,6 +46,17 @@ namespace ProjectTests
             Assert.Equal(trackId, ((Track)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetTrackByIDAsync(trackId));
         }
+
+        [Fact]
+        public async Task GetTrackByIDAsync_ShouldReturnNotFound_WhenTrackIsNull()
+        {
+            int id = -1;
+            Track track = null;
+            _projectBLMock.Setup(i => i.GetTrackByIDAsync(id)).ReturnsAsync(track);
+            TrackController trackController = new TrackController(_projectBLMock.Object);
+            var result = await trackController.GetTrackByIDAsync(id);
+            Assert.IsType<NotFoundResult>(result);
+        }
         [Fact]
         public async Task AddTrackShouldAddTrack()
         {
@@ -56,6 +67,17 @@ namespace ProjectTests
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddTrackAsync((It.IsAny<Track>())));
         }
+        [Fact]
+        public async Task AddTrackAsync_ShouldReturnStatusCode400_WhenTrackIsInvalid()
+        {
+            Track track = null;
+            _projectBLMock.Setup(i => i.AddTrackAsync(track)).Throws(new NullReferenceException());
+            TrackController trackController = new TrackController(_projectBLMock.Object);
+            var result = await trackController.AddTrackAsync(track);
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
+        }
+
         [Fact]
         public async Task DeleteTrackShouldDeleteTrack()
         {

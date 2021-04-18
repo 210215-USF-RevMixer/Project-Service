@@ -47,6 +47,24 @@ namespace ProjectTests
             Assert.Equal(sampleId, ((SampleSets)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetSampleSetsByIDAsync(sampleId));
         }
+
+        [Fact]
+        public async Task GetSampleSetsByID_ShouldReturnNotFound_WhenIDIsInvalid()
+        {
+            //arrange
+            int id = 1;
+            SampleSets sampleSets = null;
+            _projectBLMock.Setup(i => i.GetSampleSetsByIDAsync(id)).ReturnsAsync(sampleSets);
+            SampleSetsController sampleSetsController = new SampleSetsController(_projectBLMock.Object);
+
+            //act
+            var result = await sampleSetsController.GetSampleSetsByIDAsync(id);
+
+            //assert
+            Assert.IsType<NotFoundResult>(result);
+            
+        }
+
         //[Fact]
         //public async Task AddSampleSetsShouldAddSampleSets()
         //{
@@ -69,6 +87,23 @@ namespace ProjectTests
             Assert.IsAssignableFrom<NoContentResult>(result);
             _projectBLMock.Verify(x => x.DeleteSampleSetsAsync((It.IsAny<SampleSets>())));
         }
+
+        [Fact]
+        public async Task DeleteSampleSets_ShouldReturnStatusCode500_WhenSampleSetsIsInvalid()
+        {
+            //arrange
+            int id = 1;
+            SampleSets sampleSets = null;
+            _projectBLMock.Setup(i => i.DeleteSampleSetsAsync(sampleSets)).Throws(new Exception());
+            SampleSetsController sampleSetsController = new SampleSetsController(_projectBLMock.Object);
+
+            //act
+            var result = await sampleSetsController.DeleteSampleSetsAsync(id);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
+        }
         [Fact]
         public async Task UpdateSampleSetsShouldUpdateSampleSets()
         {
@@ -79,6 +114,23 @@ namespace ProjectTests
             Assert.IsAssignableFrom<NoContentResult>(result);
             _projectBLMock.Verify(x => x.UpdateSampleSetsAsync(sample));
 
+        }
+
+        [Fact]
+        public async Task UpdateSampleSetsAsync_ShouldReturnStatusCode500_WhenIDIsInvalid()
+        {
+            //arrange
+            SampleSets sampleSets = null;
+            int id = 1;
+            _projectBLMock.Setup(i => i.UpdateSampleSetsAsync(sampleSets)).Throws(new Exception());
+            SampleSetsController sampleSetsController = new SampleSetsController(_projectBLMock.Object);
+
+            //act
+            var result = await sampleSetsController.UpdateSampleSetsAsync(id, sampleSets);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
         }
 
     }
