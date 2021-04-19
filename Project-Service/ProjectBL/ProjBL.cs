@@ -184,6 +184,7 @@ namespace ProjectBL
             UsersSampleSets usersSampleSets = new UsersSampleSets();
             usersSampleSets.SampleSetsId = newSampleSets.Id;
             usersSampleSets.UserId = userId;
+            usersSampleSets.IsOwner = true;
             await _repo.AddUsersSampleSetsAsync(usersSampleSets);
             return await _repo.GetSampleSetsByIDAsync(newSampleSets.Id);
 
