@@ -65,18 +65,55 @@ namespace ProjectTests
             
         }
 
-        //[Fact]
-        //public async Task AddSampleSetsShouldAddSampleSets()
-        //{
-        //    var sample = new SampleSets();
-        //    _projectBLMock.Setup(x => x.AddSampleSetsAsync(It.IsAny<SampleSets>(), It.IsAny<int>())).Returns(Task.FromResult<SampleSets>(sample));
-        //    var sampleController = new SampleSetsController(_projectBLMock.Object);
+        [Fact]
+        public async Task AddSampleSetsShouldAddSampleSets()
+        {
+            var sample = new SampleSets();
+            _projectBLMock.Setup(x => x.AddSampleSetsAsync(It.IsAny<SampleSets>(), It.IsAny<int>())).Returns(Task.FromResult<SampleSets>(sample));
+            var sampleController = new SampleSetsController(_projectBLMock.Object);
 
-        //    var result = await sampleController.AddSampleSetsAsync();
+            var result = await sampleController.AddSampleSetsAsync();
 
-        //    Assert.IsAssignableFrom<StatusCodeResult>(result);
-        //    _projectBLMock.Verify(x => x.AddSampleSetsAsync((It.IsAny<SampleSets>()), It.IsAny<int>()));
-        //}
+            Assert.IsAssignableFrom<StatusCodeResult>(result);
+            _projectBLMock.Verify(x => x.AddSampleSetsAsync((It.IsAny<SampleSets>()), It.IsAny<int>()));
+        }
+
+        [Fact]
+        public async Task AddSampleSetsAsync_ShouldReturnStatusCode400_WhenSampleSetsIsInvalid()
+        {
+            //arrange
+            SampleSets sampleSets = null;
+            int id = -1;
+            _projectBLMock.Setup(i => i.AddSampleSetsAsync(sampleSets, id)).Throws(new Exception());
+            SampleSetsController sampleSetsController = new SampleSetsController(_projectBLMock.Object);
+
+            //act
+            var result = await sampleSetsController.AddSampleSetsAsync();
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(400, ((StatusCodeResult)result).StatusCode);
+        }
+
+        /*  public async Task<IActionResult> AddSampleSetsAsync()
+        {
+            try
+            {
+                SampleSets sampleSets = new SampleSets();
+                sampleSets.Name = Request.Form["name"];
+                sampleSets.Id = 0;
+                string userId = Request.Form["userId"];
+                await _projectBL.AddSampleSetsAsync(sampleSets, int.Parse(userId));
+                //Log.Logger.Information($"new SampleSets with ID {sampleSets.Id} created");
+                return CreatedAtAction("AddSampleSets", sampleSets);
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error($"Error thrown: {e.Message}");
+                return StatusCode(400);
+            }
+        }*/
+
         [Fact]
         public async Task DeleteSampleSetsShouldDeleteSampleSets()
         {

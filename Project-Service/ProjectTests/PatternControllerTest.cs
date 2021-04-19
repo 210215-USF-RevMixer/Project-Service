@@ -120,18 +120,6 @@ namespace ProjectTests
             Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
         }
 
-        /* public async Task<IActionResult> DeletePatternAsync(int patternID)
-        {
-            try
-            {
-                await _projectBL.DeletePatternAsync(await _projectBL.GetPatternByIDAsync(patternID));
-                return NoContent();
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }*/
         [Fact]
         public async Task UpdatePatternShouldUpdatePattern()
         {
