@@ -39,7 +39,6 @@ namespace ProjectREST.Controllers
 
         // POST api/<SavedProjectController>
         [HttpPost]
-        [Consumes("application/json")]
         public async Task<IActionResult> AddSavedProjectAsync()
         {
             try
