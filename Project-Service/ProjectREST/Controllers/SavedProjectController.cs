@@ -39,14 +39,20 @@ namespace ProjectREST.Controllers
 
         // POST api/<SavedProjectController>
         [HttpPost]
-        [Consumes("application/json")]
-        public async Task<IActionResult> AddSavedProjectAsync([FromBody] SavedProject userProject)
+        public async Task<IActionResult> AddSavedProjectAsync()
         {
             try
             {
-                await _projectBL.AddSavedProjectAsync(userProject);
-                Log.Logger.Information($"new SavedProject with ID {userProject.Id} created");
-                return CreatedAtAction("AddSavedProject", userProject);
+                SavedProject project2Send = new SavedProject();
+                project2Send.ProjectName = Request.Form["name"];
+                project2Send.SampleIds = Request.Form["sampleIds"];
+                project2Send.Id = 0;
+                project2Send.BPM = Request.Form["bPM"];
+                project2Send.Pattern = Request.Form["pattern"];
+                string userId = Request.Form["userId"];
+                await _projectBL.AddSavedProjectAsync(project2Send, int.Parse(userId));
+                Log.Logger.Information($"new SavedProject with ID {project2Send.Id} created");
+                return CreatedAtAction("AddSavedProject", project2Send);
             }
             catch (Exception e)
             {

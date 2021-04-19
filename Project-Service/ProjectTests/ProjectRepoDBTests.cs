@@ -721,7 +721,7 @@ namespace ProjectTests
             var savedproject2BUpdated = new SavedProject
             {
                 Id = 1,
-                BPM = 0,
+                BPM = "0",
                 ProjectName = "test1Update"
             };
             var projectDBContext = new ProjectDBContext(options);
@@ -781,7 +781,7 @@ namespace ProjectTests
                 var savedproject2BUpdated = new SavedProject
                 {
                     Id = 33,
-                    BPM = 0,
+                    BPM = "0",
                     ProjectName = "test1Update"
                 };
                 var projectDBContext = new ProjectDBContext(options);
@@ -931,13 +931,13 @@ namespace ProjectTests
                     new SavedProject
                     {
                         Id = 1,
-                        BPM = 0,
+                        BPM = "0",
                         ProjectName = "test1"
                     },
                     new SavedProject
                     {
                         Id = 2,
-                        BPM = 0,
+                        BPM = "0",
                         ProjectName = "test2"
                     }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectDL;
 
 namespace ProjectDL.Migrations
 {
     [DbContext(typeof(ProjectDBContext))]
-    partial class ProjectDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210419151033_SavedProjectChange1")]
+    partial class SavedProjectChange1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +103,8 @@ namespace ProjectDL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BPM")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BPM")
+                        .HasColumnType("int");
 
                     b.Property<string>("Pattern")
                         .HasColumnType("nvarchar(max)");
@@ -110,8 +112,8 @@ namespace ProjectDL.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SampleIds")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SampleIds")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -201,9 +203,6 @@ namespace ProjectDL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsOwner")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SampleSetsId")
                         .HasColumnType("int");
