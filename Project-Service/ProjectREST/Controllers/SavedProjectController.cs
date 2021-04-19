@@ -44,7 +44,14 @@ namespace ProjectREST.Controllers
         {
             try
             {
-                await _projectBL.AddSavedProjectAsync(userProject);
+                SavedProject project2Send = new SavedProject();
+                project2Send.ProjectName = Request.Form["name"];
+                project2Send.SampleIds = Request.Form["sampleIds"];
+                project2Send.Id = 0;
+                project2Send.BPM = Request.Form["bPM"];
+                project2Send.Pattern = Request.Form["pattern"];
+                string userId = Request.Form["userId"];
+                await _projectBL.AddSavedProjectAsync(userProject, int.Parse(userId));
                 Log.Logger.Information($"new SavedProject with ID {userProject.Id} created");
                 return CreatedAtAction("AddSavedProject", userProject);
             }
