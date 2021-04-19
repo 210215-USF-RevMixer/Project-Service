@@ -6,8 +6,8 @@ namespace ProjectModels
     {
         private string projectName;
         private int bPM;
-        ICollection<UserProject> userProjects;
-        ICollection<Track> tracks;
+        private int sampleIds;
+        private string pattern;
 
         public int Id { get; set; }
         public string ProjectName { 
@@ -33,8 +33,7 @@ namespace ProjectModels
             } 
         }
 
-        public ICollection<UserProject> UserProjects { get; set; }
-
-        public ICollection<Track> Tracks { get; set; }
+        public int SampleIds { get; set; }
+        public string Pattern { get; set; }
     }
 }

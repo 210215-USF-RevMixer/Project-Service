@@ -70,17 +70,17 @@ namespace ProjectDL
             //a saved project can have many userprojects (users who can edit one project), but a userproject can only have one project reference
             //when a project is deleted (only allowed by owner, ideally), the associated users who can edit will have access revoked from
             //the now non-existant project
-            modelBuilder.Entity<SavedProject>()
-                .HasMany(sp => sp.UserProjects)
-                .WithOne(up => up.SavedProject)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<SavedProject>()
+            //    .HasMany(sp => sp.UserProjects)
+            //    .WithOne(up => up.SavedProject)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             //a saved project can have many tracks, but a track can only belong to one project
             //when a project is deleted, it's related tracks are also deleted
-            modelBuilder.Entity<SavedProject>()
-                .HasMany(sp => sp.Tracks)
-                .WithOne(t => t.SavedProject)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<SavedProject>()
+            //    .HasMany(sp => sp.Tracks)
+            //    .WithOne(t => t.SavedProject)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
