@@ -59,15 +59,13 @@ namespace ProjectDL
             //if a sample is deleted, don't delete the whole track
             modelBuilder.Entity<Sample>()
                 .HasMany(s => s.Track)
-                .WithOne(t => t.Sample)
-                .OnDelete(DeleteBehavior.SetNull);
+                .WithOne(t => t.Sample);
 
             //a pattern can belong to many tracks, but a track can only have one pattern
             //even if a pattern is deleted, we don't necessarily want to delete the track
             modelBuilder.Entity<Pattern>()
                 .HasMany(p => p.Tracks)
-                .WithOne(t => t.Pattern)
-                .OnDelete(DeleteBehavior.SetNull);
+                .WithOne(t => t.Pattern);
 
             //a saved project can have many userprojects (users who can edit one project), but a userproject can only have one project reference
             //when a project is deleted (only allowed by owner, ideally), the associated users who can edit will have access revoked from
