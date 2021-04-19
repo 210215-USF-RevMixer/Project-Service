@@ -25,7 +25,7 @@ namespace ProjectBL
             userProject.Owner = true;
             userProject.UserId = userId;
             userProject.SavedProject = newSavedProject;
-            await _repo.AddUsersSampleAsync(userProject);
+            await _repo.AddUserProjectAsync(userProject);
             return await _repo.GetSavedProjectByIDAsync(newSavedProject.Id);
         }
         public async Task<SavedProject> DeleteSavedProjectAsync(SavedProject savedProject2BDeleted)
