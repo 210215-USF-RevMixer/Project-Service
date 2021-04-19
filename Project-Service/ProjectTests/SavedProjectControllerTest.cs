@@ -48,7 +48,7 @@ namespace ProjectTests
         }
     
 
-        [Fact]
+        /*[Fact]
         public async Task AddSavedProjectShouldAddSavedProject()
         {
             var savedProject = new SavedProject();
@@ -57,7 +57,7 @@ namespace ProjectTests
             var result = await savedProjectController.AddSavedProjectAsync(new SavedProject());
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddSavedProjectAsync((It.IsAny<SavedProject>())));
-        }
+        }*/
         [Fact]
         public async Task DeleteUserShouldDeleteUser()
         {
