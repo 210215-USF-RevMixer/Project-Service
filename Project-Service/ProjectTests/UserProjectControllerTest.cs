@@ -46,6 +46,18 @@ namespace ProjectTests
             Assert.Equal(userProjectId, ((UserProject)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetUserProjectByIDAsync(userProjectId));
         }
+
+        [Fact]
+        public async Task GetUserProjectByID_ShouldReturnNotFound_WhenUserProjectIsNull()
+        {
+            int id = -2;
+            UserProject userProject = null;
+            _projectBLMock.Setup(i => i.GetUserProjectByIDAsync(id)).ReturnsAsync(userProject);
+            UserProjectController userProjectController = new UserProjectController(_projectBLMock.Object);
+            var result = await userProjectController.GetUserProjectByIDAsync(id);
+            Assert.IsType<NotFoundResult>(result);
+        }
+
         [Fact]
         public async Task AddUserProjectShouldAddUserProject()
         {
@@ -56,6 +68,25 @@ namespace ProjectTests
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddUserProjectAsync((It.IsAny<UserProject>())));
         }
+
+        [Fact]
+        public async Task AddUserProjectAsync_ShouldReturnStatusCode400_WhenUserProjectIsInvalid()
+        {
+            //arrange
+            var projectBLMock = new Mock<IProjectBL>();
+            UserProject userProject = null;
+            projectBLMock.Setup(i => i.AddUserProjectAsync(userProject)).Throws(new Exception());
+            UserProjectController userProjectController = new UserProjectController(projectBLMock.Object);
+
+            //act
+            var result = await userProjectController.AddUserProjectAsync(userProject);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(400, ((StatusCodeResult)result).StatusCode);
+
+        }
+
         [Fact]
         public async Task DeleteUserShouldDeleteUser()
         {
@@ -66,6 +97,19 @@ namespace ProjectTests
             Assert.IsAssignableFrom<NoContentResult>(result);
             _projectBLMock.Verify(x => x.DeleteUserProjectAsync((It.IsAny<UserProject>())));
         }
+
+        [Fact]
+        public async Task DeleteUserProjectAsync_ShouldReturnStatusCode500_WhenUserprojectIsInvalid()
+        {
+            int id = -2;
+            UserProject userProject = null;
+            _projectBLMock.Setup(i => i.DeleteUserProjectAsync(userProject)).Throws(new Exception());
+            UserProjectController userProjectController = new UserProjectController(_projectBLMock.Object);
+            var result = await userProjectController.DeleteUserProjectAsync(id);
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
+        }
+
         [Fact]
         public async Task UpdateUserProjectShouldUpdateUserProject()
         {
@@ -76,6 +120,18 @@ namespace ProjectTests
             Assert.IsAssignableFrom<NoContentResult>(result);
             _projectBLMock.Verify(x => x.UpdateUserProjectAsync(userProject));
 
+        }
+
+        [Fact]
+        public async Task UpdateUserProjectAsync_ShouldReturnStatusCode500_WhenUserProjectIsInvalid()
+        {
+            int id = -2;
+            UserProject userProject = null;
+            _projectBLMock.Setup(i => i.UpdateUserProjectAsync(userProject)).Throws(new Exception());
+            UserProjectController userProjectController = new UserProjectController(_projectBLMock.Object);
+            var result = await userProjectController.UpdateUserProjectAsync(id, userProject);
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
         }
 
     }
