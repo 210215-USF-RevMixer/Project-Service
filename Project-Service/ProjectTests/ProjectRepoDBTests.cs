@@ -828,7 +828,7 @@ namespace ProjectTests
             {
                 Id = 1,
                 ProjectId = 8,
-                UserId = 1
+                UserId = 1,
             };
             var projectDBContext = new ProjectDBContext(options);
             var projectRepoDB = new ProjectRepoDB(projectDBContext);
@@ -931,13 +931,14 @@ namespace ProjectTests
                     new SavedProject
                     {
                         Id = 1,
-                        BPM = "0",
-                        ProjectName = "test1"
+                        BPM = "1",
+                        ProjectName = "test1",
+                        
                     },
                     new SavedProject
                     {
                         Id = 2,
-                        BPM = "0",
+                        BPM = "2",
                         ProjectName = "test2"
                     }
 
@@ -963,7 +964,7 @@ namespace ProjectTests
                     new Sample
                     {
                         Id = 1,
-                        SampleLink = "SampleLink1",
+                        SampleLink = "SampleLink1", 
                         SampleName = "SampleName1"
                     },
 
@@ -977,7 +978,7 @@ namespace ProjectTests
                 context.Pattern.AddRange(
                     new Pattern
                     {
-                        Id = 1,
+                        Id = 1, 
                         PatternData = "PatternData1",
                     },
                     new Pattern
