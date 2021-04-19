@@ -46,6 +46,23 @@ namespace ProjectTests
             Assert.Equal(patternId, ((Pattern)((OkObjectResult)result).Value).Id);
             _projectBLMock.Verify(x => x.GetPatternByIDAsync(patternId));
         }
+
+        [Fact]
+        public async Task GetPatternByIdAsync_ShouldReturnNotFound_WhenPatternIsNull()
+        {
+            //arrange
+            var patternID = 1;
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.GetPatternByIDAsync(patternID)).ReturnsAsync(pattern);
+            PatternController patternController = new PatternController(_projectBLMock.Object);
+
+            //act
+            var result = await patternController.GetPatternByIDAsync(patternID);
+
+            //assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+     
         [Fact]
         public async Task AddPatternShouldAddPattern()
         {
@@ -56,6 +73,25 @@ namespace ProjectTests
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
             _projectBLMock.Verify(x => x.AddPatternAsync((It.IsAny<Pattern>())));
         }
+
+        [Fact]
+        public async Task AddPatternAsync_ShouldReturnStatusCode400_WhenPatternIsInvalid()
+        {
+            //arrange
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.AddPatternAsync(pattern)).Throws(new Exception());
+            PatternController patternController = new PatternController(_projectBLMock.Object);
+
+            //act
+            var result = await patternController.AddPatternAsync(pattern);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(400, ((StatusCodeResult)result).StatusCode);
+        }
+  
+        /**/
+
         [Fact]
         public async Task DeletePatternShouldDeletePattern()
         {
@@ -66,6 +102,24 @@ namespace ProjectTests
             Assert.IsAssignableFrom<NoContentResult>(result);
             _projectBLMock.Verify(x => x.DeletePatternAsync((It.IsAny<Pattern>())));
         }
+
+        [Fact]
+        public async Task DeletePatternAsync_ShouldReturnStatusCode500_WhenPatternIsInvalid() 
+        {
+            //arrange
+            int id = 1;
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.DeletePatternAsync(pattern)).Throws(new Exception());
+            PatternController patternController = new PatternController(_projectBLMock.Object);
+
+            //act
+            var result = await patternController.DeletePatternAsync(id);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
+        }
+
         [Fact]
         public async Task UpdatePatternShouldUpdatePattern()
         {
@@ -78,5 +132,25 @@ namespace ProjectTests
 
         }
 
+        [Fact]
+        public async Task UpdatePatternAsync_ShouldReturnStatusCode500_WhenPatternIsInvalid()
+        {
+            //assert
+            int id = 1;
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.UpdatePatternAsync(pattern)).Throws(new Exception());
+            PatternController patternController = new PatternController(_projectBLMock.Object);
+
+            //act
+            var result = await patternController.UpdatePatternAsync(id, pattern);
+
+            //assert
+            Assert.IsType<StatusCodeResult>(result);
+            Assert.Equal(500, ((StatusCodeResult)result).StatusCode);
+
+        }
+
+
+      
     }
 }

@@ -44,6 +44,8 @@ namespace ProjectTests
             _projectBLMock.Verify(x => x.GetPatternByIDAsync(It.IsAny<int>()));
 
         }
+
+         
         [Fact]
         public async Task AddPatternAsyncShouldAddPattern()
         {
@@ -55,6 +57,23 @@ namespace ProjectTests
             _projectBLMock.Verify(x => x.AddPatternAsync(It.IsAny<Pattern>()));
 
         }
+
+        [Fact]
+        public async Task AddPatternAsync_ShouldReturnNull_WhenPatternIsNull()
+        {
+            //arrange
+            Pattern pattern = null;
+            _projectBLMock.Setup(i => i.AddPatternAsync(It.IsAny<Pattern>())).Returns(Task.FromResult<Pattern>(pattern));
+            var newProjBL = new ProjBL(_projectBLMock.Object);
+
+            //act
+            var result = await newProjBL.AddPatternAsync(pattern);
+
+            //assert
+            Assert.Null(result);
+            _projectBLMock.Verify(i => i.AddPatternAsync(It.IsAny<Pattern>()));
+        }
+
         [Fact]
         public async Task DeletePatternAsyncShouldDeletePattern()
         {
