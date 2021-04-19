@@ -5,8 +5,8 @@ namespace ProjectModels
     public class SavedProject
     {
         private string projectName;
-        private int bPM;
-        private int sampleIds;
+        private string bPM;
+        private string sampleIds;
         private string pattern;
 
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace ProjectModels
                 projectName = value;
             } 
         }
-        public int BPM {
+        public string BPM {
             get { return bPM; } 
             set
             {
@@ -33,7 +33,7 @@ namespace ProjectModels
             } 
         }
 
-        public int SampleIds { get; set; }
+        public string SampleIds { get; set; }
         public string Pattern { get; set; }
     }
 }
