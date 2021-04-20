@@ -25,7 +25,7 @@ namespace ProjectModels
             get { return bPM; } 
             set
             {
-                if (value.GetType() != typeof(int))
+                if (value.GetType() != typeof(string))
                 {
                     throw new ArgumentException("value");
                 }

@@ -993,13 +993,15 @@ namespace ProjectTests
                     {
                         Id = 1,
                         UserId = 1,
-                        ProjectId = 1
+                        ProjectId = 1,
+                        Owner = false
                     },
                     new UserProject
                     {
                         Id = 2,
                         ProjectId = 2,
-                        UserId = 2
+                        UserId = 2,
+                        Owner = false
                     }
 
               );
