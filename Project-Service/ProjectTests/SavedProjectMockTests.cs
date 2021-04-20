@@ -55,7 +55,7 @@ namespace ProjectTests
             _projectBLMock.Verify(i => i.GetSavedProjectByIDAsync(It.IsAny<int>()));
         }
 
-        [Fact]
+        /*[Fact]
         public async Task AddSavedProjectAsync_ShouldReturnNewSavedProject_WhenSavedProjectIsValid()
         {
             //arrange
@@ -69,7 +69,7 @@ namespace ProjectTests
             //assert
             Assert.Equal(newSavedProj, result);
             _projectBLMock.Verify(i => i.AddSavedProjectAsync(It.IsAny<SavedProject>()));
-        }
+        }*/
 
         [Fact]
         public async Task DeleteSavedProjectAsync_ShouldReturnProject2BDeleted_WhenSavedProjectIsValid()
@@ -171,7 +171,7 @@ namespace ProjectTests
         //    Assert.IsType<CreatedAtActionResult>(result);
         //}
 
-        [Fact]
+        /*[Fact]
         public async Task AddSavedProjectAsync_ShouldReturnStatusCode400_WhenSavedProjectIsInvalid()
         {
             //arrange
@@ -186,7 +186,7 @@ namespace ProjectTests
             //assert
             Assert.IsType<StatusCodeResult>(result);
             Assert.Equal(400, ((StatusCodeResult)result).StatusCode);
-        }
+        }*/
 
         
 

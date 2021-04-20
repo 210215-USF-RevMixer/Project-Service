@@ -17,9 +17,16 @@ namespace ProjectBL
         }
 
         //SavedProject
-        public async Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject)
+        public async Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject, int userId)
         {
-            return await _repo.AddSavedProjectAsync(newSavedProject);
+            newSavedProject =  await _repo.AddSavedProjectAsync(newSavedProject);
+            UserProject userProject = new UserProject();
+            userProject.ProjectId = newSavedProject.Id;
+            userProject.Owner = true;
+            userProject.UserId = userId;
+            userProject.SavedProject = newSavedProject;
+            await _repo.AddUserProjectAsync(userProject);
+            return await _repo.GetSavedProjectByIDAsync(newSavedProject.Id);
         }
         public async Task<SavedProject> DeleteSavedProjectAsync(SavedProject savedProject2BDeleted)
         {
@@ -184,6 +191,7 @@ namespace ProjectBL
             UsersSampleSets usersSampleSets = new UsersSampleSets();
             usersSampleSets.SampleSetsId = newSampleSets.Id;
             usersSampleSets.UserId = userId;
+            usersSampleSets.IsOwner = true;
             await _repo.AddUsersSampleSetsAsync(usersSampleSets);
             return await _repo.GetSampleSetsByIDAsync(newSampleSets.Id);
 

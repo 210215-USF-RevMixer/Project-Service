@@ -12,7 +12,7 @@ namespace ProjectBL
         Task<Sample> AddSampleAsync(Sample newSample, int userId);
         Task<SamplePlaylist> AddSamplePlaylistAsync(SamplePlaylist newSamplePlaylist);
         Task<SampleSets> AddSampleSetsAsync(SampleSets newSampleSets, int userId);
-        Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject);
+        Task<SavedProject> AddSavedProjectAsync(SavedProject newSavedProject, int userId);
         Task<Track> AddTrackAsync(Track newTrack);
         Task<Pattern> AddPatternAsync(Pattern newPattern);
         Task<UserProject> AddUserProjectAsync(UserProject newUserProject);

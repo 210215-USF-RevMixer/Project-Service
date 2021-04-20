@@ -5,9 +5,9 @@ namespace ProjectModels
     public class SavedProject
     {
         private string projectName;
-        private int bPM;
-        ICollection<UserProject> userProjects;
-        ICollection<Track> tracks;
+        private string bPM;
+        private string sampleIds;
+        private string pattern;
 
         public int Id { get; set; }
         public string ProjectName { 
@@ -21,11 +21,11 @@ namespace ProjectModels
                 projectName = value;
             } 
         }
-        public int BPM {
+        public string BPM {
             get { return bPM; } 
             set
             {
-                if (value.GetType() != typeof(int))
+                if (value.GetType() != typeof(string))
                 {
                     throw new ArgumentException("value");
                 }
@@ -33,8 +33,7 @@ namespace ProjectModels
             } 
         }
 
-        public ICollection<UserProject> UserProjects { get; set; }
-
-        public ICollection<Track> Tracks { get; set; }
+        public string SampleIds { get; set; }
+        public string Pattern { get; set; }
     }
 }

@@ -190,16 +190,12 @@ namespace ProjectDL
         public async Task<SavedProject> GetSavedProjectByIDAsync(int savedProjectID)
         {
             return await _context.SavedProject
-                .Include(savedProject => savedProject.UserProjects)
-                .AsNoTracking()
                 .FirstOrDefaultAsync(savedProject => savedProject.Id == savedProjectID);
         }
 
         public async Task<List<SavedProject>> GetSavedProjectsAsync()
         {
             return await _context.SavedProject
-                .Include(savedProject => savedProject.UserProjects)
-                .AsNoTracking()
                 .Select(sampleProject => sampleProject)
                 .ToListAsync();
         }
