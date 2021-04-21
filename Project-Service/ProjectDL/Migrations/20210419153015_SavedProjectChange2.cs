@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectDL.Migrations
 {
-    [ExcludeFromCodeCoverage]
     public partial class SavedProjectChange2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

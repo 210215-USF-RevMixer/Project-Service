@@ -23,8 +23,8 @@ namespace ProjectTests
             .Options;
             Seed();
         }
-         [Fact]
-        public async void GetPatternsAsyncShouldReturnAllPatterns()
+        [Fact]
+        public async Task GetPatternsAsyncShouldReturnAllPatterns()
         {
             using (var context = new ProjectDBContext(options))
             {
@@ -35,7 +35,7 @@ namespace ProjectTests
             }
         }
         [Fact]
-        public async void GetPatternByIDAsyncShouldReturnPattern()
+        public async Task GetPatternByIDAsyncShouldReturnPattern()
         {
             using (var context = new ProjectDBContext(options))
             {
@@ -48,7 +48,7 @@ namespace ProjectTests
             }
         }
         [Fact]
-        public async void AddPatternAsyncShouldAddPattern()
+        public async Task AddPatternAsyncShouldAddPattern()
         {
             using (var context = new ProjectDBContext(options))
             {
@@ -60,7 +60,7 @@ namespace ProjectTests
             }
         }
         [Fact]
-        public async void DeletePatternAsyncShouldDeletePattern()
+        public async Task DeletePatternAsyncShouldDeletePattern()
         {
             using (var context = new ProjectDBContext(options))
             {
@@ -78,7 +78,7 @@ namespace ProjectTests
             }
         }
         [Fact]
-        public async void UpdatePatternAsyncShouldUpdatePattern()
+        public async Task UpdatePatternAsyncShouldUpdatePattern()
         {
             using (var context = new ProjectDBContext(options))
             {
