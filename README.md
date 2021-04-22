@@ -133,7 +133,7 @@ ICollection\<Track>|tracks
 
 Get | Post 
 ----|----
-/api/Sample | /api/Sample?userId={id}
+/api/Sample | /api/Sample
 /api/Sample/{id} | 
 
 </td><td>
@@ -148,7 +148,7 @@ Get | Post
 
 Get | Post 
 ----|----
-/api/SampleSets | /api/SampleSets?userId={id}
+/api/SampleSets | /api/SampleSets
 /api/SampleSets/{id} | 
 
 </td><td>
@@ -279,14 +279,33 @@ int|sampleSetsId
 </tr> 
 </table>
 
-### Requirements
+### Technologies
+* C#
+* ASP.NET Core
+* Entity Framework Core
+* SQL Server
+* Moq/Xunit
+* Azure Blob Storage
 
 ### Setup
-
-### Testing
-
-### Configuration
-
+* Install [.NET 5.0+](https://dotnet.microsoft.com/download)
+* create ~/../Project-Service/ProjectREST/appsettings.json containing:
+```
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+  },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        "ProjectDB": "<Insert Valid Connection string to a SQL Database>",
+        "BlobStorage": "<Insert Valid Blob Storage Connection String>"
+    }
+}
+```
 
 
 

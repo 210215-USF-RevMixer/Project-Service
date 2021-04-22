@@ -62,21 +62,21 @@ namespace ProjectTests
             Assert.IsType<NotFoundResult>(result);
 
         }
-        [Fact]
-        public async Task AddSampleAsync_ShouldReturnCreatedAtAction()
-        {
-            //arrange
-            int id = 1;
-            Sample sample = new Sample();
-            _projectBLMock.Setup(i => i.AddSampleAsync(sample, id)).ReturnsAsync(sample);
-            SampleController sampleController = new SampleController(_projectBLMock.Object);
+        //[Fact]
+        //public async Task AddSampleAsync_ShouldReturnCreatedAtAction()
+        //{
+        //    //arrange
+        //    int id = 1;
+        //    Sample sample = new Sample();
+        //    _projectBLMock.Setup(i => i.AddSampleAsync(sample, id)).ReturnsAsync(sample);
+        //    SampleController sampleController = new SampleController(_projectBLMock.Object);
 
-            //act
-            var result = await sampleController.AddSampleAsync();
+        //    //act
+        //    var result = await sampleController.AddSampleAsync();
 
-            //assert
-            Assert.IsType<CreatedAtActionResult>(result);
-        }
+        //    //assert
+        //    Assert.IsType<CreatedAtActionResult>(result);
+        //}
 
 
         [Fact]
